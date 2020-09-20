@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\WpfApp_Log.png" />
+    <None Remove="Assets\WpfApp_Bg.png" />
+    <None Remove="Assets\WpfApp_Logo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\WpfApp_Log.png">
+    <Content Include="Assets\WpfApp_Bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\WpfApp_Logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

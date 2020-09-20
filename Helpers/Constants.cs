@@ -6,6 +6,6 @@ namespace WpfApp.Helpers
 {
     public static class Constants
     {
-        public static string WfpAppName = "RishiSilvers";
+        public static string WfpAppName = "AppName";
     }
 }

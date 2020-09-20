@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="WpfApp.Registration.CustomerRegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:validation="clr-namespace:WpfApp.Common.Validation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <Grid Margin="15,0,15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="CUSTOMER REGISTRATION" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="Gray" FontSize="18" Grid.Row="0"/>
+                <Grid VerticalAlignment="Center" Margin="15,0,15,0" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+
+                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MOBILE NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="1" Grid.Column="0">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                        <TextBox.Text>
+                            <Binding Path="Customer.MobileNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:IntegerValidationRule ValidationStep="RawProposedValue" Length="10"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <ComboBox  Margin="0,10" materialDesign:HintAssist.Hint="REFERRED BY" ItemsSource="{Binding ReferrableEmployees}"  SelectedValue="{Binding SelectedReferredEmployee}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="2" Grid.Column="0" SelectedIndex="{Binding ReferredBySelectedIndex}" SelectedItem="{Binding Customer.ReferredBy,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+
+                    <DatePicker materialDesign:HintAssist.Hint="DATE OF BIRTH" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,7,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18"  Grid.Row="0" Grid.Column="1"  SelectedDate="{Binding Customer.DOB, UpdateSourceTrigger=PropertyChanged}">
+                        <DatePicker.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                        </DatePicker.InputBindings>
+                    </DatePicker>
+
+                    <DatePicker materialDesign:HintAssist.Hint="DATE OF JOIN" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,6,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18"  Grid.Row="1" Grid.Column="1"  SelectedDate="{Binding Customer.DOJ, UpdateSourceTrigger=PropertyChanged}">
+                        <DatePicker.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                        </DatePicker.InputBindings>
+                    </DatePicker>
+                </Grid>
+                <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+                    <Button Width="150" VerticalAlignment="Bottom" Margin="0,0,15,0" Content="{ Binding ButtonState}" Background="#FF78BE1F" Command="{Binding Path = BtnSaveUpdateCommand}"/>
+                    <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Delete" Background="#FF78BE1F" Command="{Binding Path = BtnDeleteCommand}" Grid.Row="2"/>
+                </WrapPanel>
+                <DataGrid Height="auto"  Width="auto" RowBackground="#e4ffcf" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridCustomers}" SelectedItem="{Binding SelectedEmployee}"  IsSynchronizedWithCurrentItem="True" Grid.Row="3" Margin="0,15">
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#78BE1F" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding GridUpdateCommand}" CommandParameter="{Binding GridCustomers/}"/>
+                    </DataGrid.InputBindings>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" Binding="{Binding CustomerId}" Width="*"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                        <DataGridTextColumn Header="Mobile No" Binding="{Binding MobileNumber}" Width="*"/>
+                        <DataGridTextColumn Header="DOB" Binding="{Binding DOB, StringFormat=\{0:ddMMMyyyy\}}"  Width="*"/>
+                        <DataGridTextColumn Header="DOJ" Binding="{Binding DOJ, StringFormat=\{0:ddMMMyyyy\}}"  Width="*"/>
+                        <DataGridTextColumn Header="Referred By" Binding="{Binding Employee.UserName}"  Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

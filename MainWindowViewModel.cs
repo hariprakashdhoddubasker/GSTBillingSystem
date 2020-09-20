@@ -21,6 +21,8 @@ namespace WpfApp
         //private BackUpRestoreViewModel myBackUpRestoreViewModel;
         private IEventAggregator myEventAggregator;
         private string myCurrentUserName;
+        private string myWpfAppName;
+
         public MainWindowViewModel(IEventAggregator eventAggregator)
         {
             Task.Run(() =>
@@ -37,6 +39,7 @@ namespace WpfApp
                 this.SelectedViewModel = myCustomerRegistrationViewModel;
                 this.BtnContactCommand = new Command(this.OnContactClick, o => true);
             });
+            WpfAppName = Constants.WfpAppName;
         }
 
         public ICommand BtnContactCommand { get; private set; }
@@ -47,6 +50,12 @@ namespace WpfApp
         {
             get { return mySelectedViewModel; }
             set => SetProperty(ref mySelectedViewModel, value);
+        }
+
+        public string WpfAppName
+        {
+            get { return myWpfAppName; }
+            set => SetProperty(ref myWpfAppName, value);
         }
 
         public string CurrentUserName

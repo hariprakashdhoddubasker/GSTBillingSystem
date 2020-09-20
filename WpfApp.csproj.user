@@ -7,7 +7,13 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Common\HeaderView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Common\MenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Common\NavigationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Dialog\DialogWindow.xaml.cs">
@@ -16,9 +22,18 @@
     <Compile Update="Employees\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Registration\CustomerRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Common\HeaderView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Common\MenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Common\NavigationView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Dialog\DialogWindow.xaml">
@@ -31,6 +46,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Registration\CustomerRegistrationView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

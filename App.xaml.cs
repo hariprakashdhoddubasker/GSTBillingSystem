@@ -45,19 +45,19 @@ namespace WpfApp
             var loginViewModel = ContainerHelper.Container.Resolve<LoginViewModel>();
             var login = new LoginView { DataContext = loginViewModel };
 
-            loginViewModel.LoginCompleted += (sender, args) =>
-            {
-                mainWindowViewModel.RegisterNavigationViewModel();
-                MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
-                mainWindow.Show();
-                login.Close();
-            };
-            login.ShowDialog();
+            //loginViewModel.LoginCompleted += (sender, args) =>
+            //{
+            //    mainWindowViewModel.RegisterNavigationViewModel();
+            //    MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
+            //    mainWindow.Show();
+            //    login.Close();
+            //};
+            //login.ShowDialog();
 
-            //UIService.CurrentUser = new Model.Partner { UserName = "DemoUser", Role = NatureBoxRoles.Admin.ToString() };
-            //mainWindowViewModel.RegisterNavigationViewModel();
-            //MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
-            //mainWindow.Show();
+            UIService.CurrentUser = new Model.Employee { UserName = "DemoUser", Role = WpfAppRoles.Admin.ToString() };
+            mainWindowViewModel.RegisterNavigationViewModel();
+            MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
+            mainWindow.Show();
         }
 
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
