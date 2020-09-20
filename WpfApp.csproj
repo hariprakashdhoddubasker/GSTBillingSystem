@@ -4,14 +4,16 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>WpfApp</AssemblyName>
+    <RootNamespace>WpfApp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\RishiSilvers_Log.png" />
+    <None Remove="Assets\WpfApp_Log.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\RishiSilvers_Log.png">
+    <Content Include="Assets\WpfApp_Log.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -24,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RishiSilvers.DataAccess\RishiSilvers.DataAccess.csproj" />
-    <ProjectReference Include="..\RishiSilvers.Model\RishiSilvers.Model.csproj" />
+    <ProjectReference Include="..\WpfApp.DataAccess\WpfApp.DataAccess.csproj" />
+    <ProjectReference Include="..\WpfApp.Model\WpfApp.Model.csproj" />
   </ItemGroup>
 
 </Project>

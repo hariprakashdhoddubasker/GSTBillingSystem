@@ -1,8 +1,8 @@
-﻿using RishiSilvers.Helpers;
+﻿using WpfApp.Helpers;
 using System;
 using System.Windows.Input;
 
-namespace RishiSilvers.Dialog
+namespace WpfApp.Dialog
 {
     public class DialogViewModel : IDialogRequestClose
     {

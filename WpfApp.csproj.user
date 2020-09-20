@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Common\MenuView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialog\DialogWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -15,6 +18,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Common\MenuView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Dialog\DialogWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

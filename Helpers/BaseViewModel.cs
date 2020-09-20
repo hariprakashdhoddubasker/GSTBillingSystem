@@ -1,9 +1,6 @@
-﻿using RishiSilvers.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using WpfApp.Common;
 
-namespace RishiSilvers.Helpers
+namespace WpfApp.Helpers
 {
     public class BaseViewModel : AbstractNotifyPropertyChanged
     {

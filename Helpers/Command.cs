@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace RishiSilvers.Helpers
+namespace WpfApp.Helpers
 {
     public class Command : ICommand
     {

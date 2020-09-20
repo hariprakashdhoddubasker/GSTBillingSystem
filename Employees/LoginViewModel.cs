@@ -1,14 +1,14 @@
-﻿using RishiSilvers.Common;
-using RishiSilvers.Employees.Service;
-using RishiSilvers.Helpers;
-using RishiSilvers.Model;
+﻿using WpfApp.Common;
+using WpfApp.Employees.Service;
+using WpfApp.Helpers;
+using WpfApp.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 
-namespace RishiSilvers.Employees
+namespace WpfApp.Employees
 {
     public class LoginViewModel : AbstractNotifyPropertyChanged
     {

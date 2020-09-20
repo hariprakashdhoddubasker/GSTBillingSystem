@@ -1,8 +1,8 @@
-﻿using RishiSilvers.Model;
+﻿using WpfApp.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RishiSilvers.Employees.Service
+namespace WpfApp.Employees.Service
 {
     public interface IEmployeeRepository
     {

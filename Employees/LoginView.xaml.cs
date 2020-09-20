@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace RishiSilvers.Employees
+namespace WpfApp.Employees
 {
     /// <summary>
     /// Interaction logic for LoginView.xaml

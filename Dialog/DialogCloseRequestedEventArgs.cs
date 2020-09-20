@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RishiSilvers.Dialog
+namespace WpfApp.Dialog
 {
     public class DialogCloseRequestedEventArgs : EventArgs
     {

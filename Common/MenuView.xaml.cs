@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,16 +11,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp
+namespace WpfApp.Common
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MenuView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MenuView : UserControl
     {
-        public MainWindow()
+        public MenuView()
         {
             InitializeComponent();
+        }
+        public MenuView(ItemMenuViewModel itemMenu)
+        {
+            InitializeComponent();
+
+            ListViewItemMenu.Visibility = Visibility.Collapsed;
+
+            this.DataContext = itemMenu;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace RishiSilvers.Dialog
+﻿namespace WpfApp.Dialog
 {
     /// <summary>
     /// Interaction logic for DialogWindow.xaml

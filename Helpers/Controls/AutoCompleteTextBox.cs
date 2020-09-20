@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-namespace RishiSilvers.Helpers.Controls
+namespace WpfApp.Helpers.Controls
 {
     public class AutoCompleteTextBox : Control
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 
-namespace RishiSilvers.Dialog
+namespace WpfApp.Dialog
 {
     public class DialogService : IDialogService
     {

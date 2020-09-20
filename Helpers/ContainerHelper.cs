@@ -1,9 +1,10 @@
 ﻿using Prism.Events;
-using RishiSilvers.Employees.Service;
+using WpfApp.Employees.Service;
 using Unity;
 using Unity.Lifetime;
+using WpfApp.Registration.Service;
 
-namespace RishiSilvers.Helpers
+namespace WpfApp.Helpers
 {
     public static class ContainerHelper
     {
@@ -13,7 +14,7 @@ namespace RishiSilvers.Helpers
             Container.RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager());
             Container.RegisterType<IEmployeeRepository, EmployeeRepository>(new ContainerControlledLifetimeManager());
             //Container.RegisterType<IEventAggregator, EventAggregator>(new ContainerControlledLifetimeManager());
-            //Container.RegisterType<ICustomerRepository, CustomersRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ICustomerRepository, CustomerRepository>(new ContainerControlledLifetimeManager());
             //Container.RegisterType<IProductRepository, ProductRepository>(new ContainerControlledLifetimeManager());
             //Container.RegisterType<ICustomerPaymentRepository, PaymentRepository>(new ContainerControlledLifetimeManager());     
             //Container.RegisterType<IInvoiceRepository, InvoiceRepository>(new ContainerControlledLifetimeManager());

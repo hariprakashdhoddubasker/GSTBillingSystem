@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RishiSilvers.DataAccess;
-using RishiSilvers.Helpers;
-using RishiSilvers.Model;
+using WpfApp.DataAccess;
+using WpfApp.Helpers;
+using WpfApp.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RishiSilvers.Employees.Service
+namespace WpfApp.Employees.Service
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly Func<RishiSilversDbContext> _context;
+        private readonly Func<WfpAppDbContext> _context;
 
-        public EmployeeRepository(Func<RishiSilversDbContext> contextCreator)
+        public EmployeeRepository(Func<WfpAppDbContext> contextCreator)
         {
             _context = contextCreator;
         }

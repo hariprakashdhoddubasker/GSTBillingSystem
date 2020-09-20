@@ -1,5 +1,5 @@
-﻿using RishiSilvers.Dialog;
-using RishiSilvers.Model;
+﻿using WpfApp.Dialog;
+using WpfApp.Model;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Threading;
 
-namespace RishiSilvers.Helpers
+namespace WpfApp.Helpers
 {
     public static class UIService
     {

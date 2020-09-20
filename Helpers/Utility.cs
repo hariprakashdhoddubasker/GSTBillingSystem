@@ -1,9 +1,24 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
-namespace RishiSilvers.Helpers
+namespace WpfApp.Helpers
 {
     public class Utility
     {
+        public static WpfAppForms GetNatureBoxForm(string formName)
+        {
+            WpfAppForms natureBoxForms;
+            foreach (string name in Enum.GetNames(typeof(WpfAppForms)))
+            {
+                natureBoxForms = (WpfAppForms)Enum.Parse(typeof(WpfAppForms), name);
+                if (formName == natureBoxForms.GetDescription())
+                {
+                    return natureBoxForms;
+                }
+            }
+            return WpfAppForms.Invoice;
+        }
+
         public static string GetAvailableDrivePath()
         {
             var drivePath = string.Empty;

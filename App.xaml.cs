@@ -1,6 +1,6 @@
-﻿using RishiSilvers.Dialog;
-using RishiSilvers.Employees;
-using RishiSilvers.Helpers;
+﻿using WpfApp.Dialog;
+using WpfApp.Employees;
+using WpfApp.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Windows;
 using System.Windows.Threading;
 using Unity;
 
-namespace RishiSilvers
+namespace WpfApp
 {
     /// <summary>
     /// Interaction logic for App.xaml
