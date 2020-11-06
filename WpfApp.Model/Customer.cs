@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WpfApp.Common;
@@ -9,13 +9,11 @@ namespace WpfApp.Model
     public class Customer : AbstractNotifyPropertyChanged
     {
         private string myName;
-        private DateTime myDOB = DateTime.Now;
         private long myMobileNumber;
-        private DateTime myDOJ;
         private int myCustomerId;
-        private int myReferredBy;
-        private double myBalanceAmount;
-        private double myTotalAmountPaid;
+        private int myStateId;
+        private string myAddress;
+        private string myGSTNumber;
 
         [Key]
         public int CustomerId
@@ -36,41 +34,40 @@ namespace WpfApp.Model
             set => SetProperty(ref myMobileNumber, value);
         }
 
-        public DateTime DOB
+        public string Address
         {
-            get => this.myDOB;
-            set => SetProperty(ref myDOB, value);
+            get => this.myAddress;
+            set => SetProperty(ref myAddress, value);
         }
 
-        public DateTime DOJ
+        public string GstNumber
         {
-            get => this.myDOJ;
-            set => SetProperty(ref myDOJ, value);
+            get => this.myGSTNumber;
+            set => SetProperty(ref myGSTNumber, value);
         }
 
-        public double BalanceAmount
+        public int StateId
         {
-            get => this.myBalanceAmount;
-            set => SetProperty(ref myBalanceAmount, value);
+            get => this.myStateId;
+            set => SetProperty(ref myStateId, value);
         }
 
-        public double TotalAmountPaid
-        {
-            get => this.myTotalAmountPaid;
-            set => SetProperty(ref myTotalAmountPaid, value);
-        }
-
-        public int EmployeeId
-        {
-            get => this.myReferredBy;
-            set => SetProperty(ref myReferredBy, value);
-        }
-
-        //public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual State State { get; set; }
+        public virtual ICollection<GstBill> GstBills { get; set; }
 
         public override string ToString()
         {
             return string.Format("{0}", Name);
+        }
+
+        public void Clear()
+        {
+            CustomerId = 0;
+            Name = string.Empty;
+            MobileNumber = 0;
+            Address = string.Empty;
+            GstNumber = string.Empty;
+            StateId = 0;
         }
     }
 }

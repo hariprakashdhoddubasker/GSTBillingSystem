@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace WpfApp.Helpers
 {
     public class LogService
     {
-        private static string filePath = $"{Utility.GetAvailableDrivePath()}NatureBoxLog.txt";
+        private static string filePath = $"{Utility.GetAvailableDrivePath()}AppLog.txt";
         public static void LogException(Exception ex)
         {
             UIService.ShowMessage(ex.Message);

@@ -3,37 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid  HorizontalAlignment="Stretch" Background="#FF78BE1F">
+    <Grid  HorizontalAlignment="Stretch" Background="{StaticResource PrimaryHueDarkBrush}"  x:Name="sidePanel"  Width="250">
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="185"/>
             <RowDefinition Height="326*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Background="White">
-            <Image Source="/Assets/WpfApp_Bg.png" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
+                <materialDesign:PackIcon Kind="Menu" Width="25" Height="25" Foreground="Gray"/>
+            </Button>
+            <Image Grid.Row="1" Source="/Assets/Company_Symbol_small.png"/>
         </Grid>
         <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <ContentControl Content="{Binding MenuItem}"/>
         </ScrollViewer>
-        <Grid Margin="5,5,0,5" Grid.Row="2">
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="0">Software By</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="1">:</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="0" Grid.Column="2">HARI PRAKASH</TextBlock>
-            <TextBlock Margin="10,0,0,0" FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="0">Contact</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="1">:</TextBlock>
-            <TextBlock FontWeight="Bold" Foreground="White" Grid.Row="1" Grid.Column="2">8089947074</TextBlock>
-        </Grid>
     </Grid>
 </UserControl>

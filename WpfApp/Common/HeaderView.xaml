@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WpfApp.Common"
+             xmlns:buttonBehavior="clr-namespace:WpfApp.Common.Behaviors"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Rectangle Height="45" VerticalAlignment="Top">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF78BE1F"/>
+                    <GradientStop Color="#7B1FA2"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -18,22 +19,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <!--<TextBlock Margin="10,10,10,0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Foreground="White" FontWeight="DemiBold" Text="Contact">
-                <TextBlock.Style>
-                    <Style TargetType="TextBlock">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-                <TextBlock.InputBindings>
-                    <MouseBinding Command="{Binding BtnContactCommand}" MouseAction="LeftClick" />
-                </TextBlock.InputBindings>
-            </TextBlock>-->
             <Label Content="{Binding WpfAppName}" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Berlin Sans FB Demi" Foreground="White" FontSize="35" Grid.Row="0" Grid.ColumnSpan="3" FontWeight="DemiBold"/>
-            <TextBlock Margin="0,10,10,0" HorizontalAlignment="Right" VerticalAlignment="Top" FontSize="18" Grid.Row="1" Foreground="White" FontWeight="DemiBold" Text="{Binding CurrentUserName}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Top"  Grid.Row="1">
+                <TextBlock Margin="0,10,10,0" FontSize="18" Foreground="White" FontWeight="DemiBold" Text="{Binding CurrentUserName}"/>
+
+                <!--<Button Style="{StaticResource MaterialDesignIconForegroundButton}" ToolTip="Close" buttonBehavior:ButtonCloseWindowBehavior.IsClose="True"  FontWeight="DemiBold"  Foreground="White">
+                    <materialDesign:PackIcon Kind="Power" />
+                </Button>-->
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

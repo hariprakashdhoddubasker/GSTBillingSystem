@@ -4,20 +4,51 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>WpfApp</AssemblyName>
+	<UseWindowsForms>true</UseWindowsForms>
+    <AssemblyName>RishiSilvers</AssemblyName>
     <RootNamespace>WpfApp</RootNamespace>
+    <ApplicationIcon>Company_Logo_Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\WpfApp_Bg.png" />
-    <None Remove="Assets\WpfApp_Logo.png" />
+    <None Remove="Assets\Company_Background.jpg" />
+    <None Remove="Assets\Company_Symbol_small.png" />
+    <None Remove="Assets\Company_Symbol_small_full.png" />
+    <None Remove="Assets\Ganapathi_full.jpg" />
+    <None Remove="Assets\GstBillStatement.html" />
+    <None Remove="Assets\Hari.JPG" />
+    <None Remove="Assets\InvoiceReport.html" />
+    <None Remove="Assets\LoginCompanySymbol.png" />
+    <None Remove="Assets\OM.jpg" />
+    <None Remove="Helpers\HtmlService\LetterPad.html" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\WpfApp_Bg.png">
+    <Content Include="Assets\Company_Symbol_small.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\WpfApp_Logo.png">
+    <Content Include="Assets\Ganapathi_full.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\GstBillStatement.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Hari.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\InvoiceReport.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\LoginCompanySymbol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\OM.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Company_Background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\LetterPad.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -26,12 +57,19 @@
     <PackageReference Include="MaterialDesignThemes" Version="3.1.3" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
+    <PackageReference Include="sautinsoft.rtftohtml" Version="7.4.5.25" />
     <PackageReference Include="Unity" Version="5.11.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WpfApp.DataAccess\WpfApp.DataAccess.csproj" />
     <ProjectReference Include="..\WpfApp.Model\WpfApp.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Company_Symbol_small_full.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

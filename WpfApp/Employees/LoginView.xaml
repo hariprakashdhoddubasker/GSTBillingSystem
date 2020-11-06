@@ -21,8 +21,8 @@
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
-                    <GradientStop Color="#FF78BE1F" Offset="1"/>
-                    <GradientStop Color="#FF78BE1F" Offset="0.7"/>
+                    <GradientStop Color="Purple" Offset="1"/>
+                    <GradientStop Color="Purple" Offset="0.7"/>
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -44,10 +44,10 @@
                 <PasswordBox  Name="txtPassword" Margin="0,10"  materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"  KeyDown="Password_KeyDown"/>
             </StackPanel>
         </Grid>
-        <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN" Background="#FF78BE1F" Command="{Binding Path = BtnLoginCommand}"/>
+        <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="LOGIN" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding Path = BtnLoginCommand}" Click="Button_Click"/>
 
-        <TextBlock Text="Eat Good Feel Good" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray"/>
+        <TextBlock Text="RISHI SILVERS" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray"/>
 
-        <Image Source="/Assets/WpfApp_Logo.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
+        <Image Source="/Assets/LoginCompanySymbol.png" Width="150" Height="150" VerticalAlignment="Top" Margin="30"/>
     </Grid>
 </Window>

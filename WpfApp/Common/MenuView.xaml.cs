@@ -26,8 +26,6 @@ namespace WpfApp.Common
         {
             InitializeComponent();
 
-            ListViewItemMenu.Visibility = Visibility.Collapsed;
-
             this.DataContext = itemMenu;
         }
     }

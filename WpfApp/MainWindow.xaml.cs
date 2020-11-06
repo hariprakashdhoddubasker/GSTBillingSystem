@@ -22,6 +22,7 @@ namespace WpfApp
     {
         public MainWindow()
         {
+            Application.Current.MainWindow = this;
             InitializeComponent();
         }
     }

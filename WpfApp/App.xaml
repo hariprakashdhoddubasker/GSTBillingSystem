@@ -1,19 +1,67 @@
 ﻿<Application x:Class="WpfApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:customer="clr-namespace:WpfApp.Registration">
+             xmlns:register="clr-namespace:WpfApp.Registration"
+             xmlns:invoice="clr-namespace:WpfApp.Invoices"
+             xmlns:common="clr-namespace:WpfApp.Common"
+             DispatcherUnhandledException="Application_DispatcherUnhandledException">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.LightGreen.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightGreen.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Purple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.LightBlue.xaml" />
                 <ResourceDictionary Source="Helpers/Resources/AutoCompleteTextBox.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type customer:CustomerRegistrationViewModel}">
-                <customer:CustomerRegistrationView/>
+            <Style TargetType="TextBox">
+                <Setter Property="Validation.ErrorTemplate">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <StackPanel>
+                                <AdornedElementPlaceholder x:Name="placeholder"/>
+                                <TextBlock FontSize="12" Foreground="Red" Text="{Binding ElementName=placeholder,
+                Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="Validation.HasError" Value="True">
+                        <Setter Property="Background" Value="Red"/>
+                        <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+            Path=(Validation.Errors)[0].ErrorContent}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <DataTemplate DataType="{x:Type register:CustomerRegistrationViewModel}">
+                <register:CustomerRegistrationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type register:StateRegistrationViewModel}">
+                <register:StateRegistrationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type register:ProductRegistrationViewModel}">
+                <register:ProductRegistrationView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type invoice:InvoiceViewModel}">
+                <invoice:InvoiceView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type invoice:InvoiceReportViewModel}">
+                <invoice:InvoiceReportView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type invoice:LetterPadViewModel}">
+                <invoice:LetterPadView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type invoice:SignatureViewModel}">
+                <invoice:SignatureView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type common:BackUpRestoreViewModel}">
+                <common:BackUpRestoreView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type common:ContactViewModel}">
+                <common:ContactView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

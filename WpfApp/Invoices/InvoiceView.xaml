@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="WpfApp.Invoices.InvoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:controls="clr-namespace:WpfApp.Helpers.Controls" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:behaviors="clr-namespace:WpfApp.Common.Behaviors" 
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+    </UserControl.InputBindings>
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <Grid  Margin="15,0,15,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="INVOICE" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="Gray" FontSize="18" Grid.Row="0"/>
+
+                <Grid VerticalAlignment="Center" Grid.Row="1"  Margin="15,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <controls:AutoCompleteTextBox x:Name="txt" Margin="0,10" AutoCompleteWidth="{Binding ElementName=txt, Path=ActualWidth}" AutoCompleteHeight="150" AutoCompletePlacementTarget="{Binding ElementName=txt}" AutoCompletePlacement="Bottom" AutoCompleteItemSource ="{Binding GridCustomers}" SearchText="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0" SelectedItem="{Binding Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SetAutoCompleteText="{Binding SearchString, Mode=TwoWay}">
+                        <controls:AutoCompleteTextBox.AutoCompleteColumns>
+                            <DataGridTextColumn Header="Id" MinWidth="60" Width="Auto" Binding="{Binding CustomerId}"/>
+                            <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Mobile Number" Width="150" Binding="{Binding MobileNumber}"/>
+                            <DataGridTextColumn Header="GST No" Width="150" Binding="{Binding GstNumber}"/>
+                        </controls:AutoCompleteTextBox.AutoCompleteColumns>
+                    </controls:AutoCompleteTextBox>
+
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="ADDRESS" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Address, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0" IsReadOnly="True" IsTabStop="False" />
+
+                    <Grid Grid.Row="2" Grid.Column="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="State" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.State.StateName, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Column="0" IsTabStop="False" />
+
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="State Code" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.State.StateCode, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Grid.Column="1" IsTabStop="False" />
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="0" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="MOBILE NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.MobileNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" IsReadOnly="True" IsTabStop="False" />
+
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="GST NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.GstNumber, UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" IsReadOnly="True" IsTabStop="False" />
+                    </Grid>
+
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ComboBox  Margin="5,10" Height="45" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="TAX PAYABLE ON REVERSE"  FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Column="0" ItemsSource="{Binding IsTaxPayableReverseItems}" SelectedItem="{Binding GstBill.IsTaxPayableReverse}">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+                        
+                        <ComboBox  Margin="5,10" Height="45" VerticalAlignment="Bottom" materialDesign:HintAssist.Hint="PRODUCT NAME" ItemsSource="{Binding Products}"  SelectedItem="{Binding Invoice.Product, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding SelectedProduct,Mode=TwoWay}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Column="1">
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel />
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
+                    </Grid>
+
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <DatePicker materialDesign:HintAssist.Hint="INVOICE DATE" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,7,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Column="0"  SelectedDate="{Binding GstBill.GstDate, UpdateSourceTrigger=PropertyChanged}">
+                            <DatePicker.InputBindings>
+                                <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                            </DatePicker.InputBindings>
+                        </DatePicker>
+
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="HSN CODE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.Product.HsnCode, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" IsReadOnly="True" IsTabStop="False"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="WEIGHT (in KG)" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Column="0" behaviors:SelectAllFocusBehavior.Enable="True">
+                                <TextBox.Text>
+                                    <Binding Path="Invoice.Weight" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" Delay="1000">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="RATE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Column="1" behaviors:SelectAllFocusBehavior.Enable="True" >
+                                <TextBox.Text>
+                                    <Binding Path="Invoice.Rate" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" ConverterCulture="gu-IN" StringFormat="c" Delay="500">
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="AMOUNT BEFORE TAX" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.AmountBeforeTax, UpdateSourceTrigger=PropertyChanged, ConverterCulture='gu-IN' ,StringFormat=c}" Grid.Column="0"   IsReadOnly="True" IsTabStop="False"/>
+
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="INVOICE SERIAL NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding GstBill.BillSerialNumber, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"   IsReadOnly="True" IsTabStop="False"/>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="SGST 1.5%" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.SGST,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ConverterCulture='gu-IN' ,StringFormat=c}" Grid.Column="0" IsReadOnly="True" IsTabStop="False"/>
+
+                            <TextBox Margin="5,10" materialDesign:HintAssist.Hint="CGST 1.5%" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.CGST,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ConverterCulture='gu-IN' ,StringFormat=c}" Grid.Column="1" IsReadOnly="True" IsTabStop="False"/>
+                        </Grid>
+
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="IGST 3%" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Invoice.IGST,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ConverterCulture='gu-IN' ,StringFormat=c}"  Grid.Row="3" IsReadOnly="True" IsTabStop="False"/>
+
+                        <TextBox Margin="5,10" materialDesign:HintAssist.Hint="AMOUNT AFTER TAX" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="4" Grid.Column="1"  Grid.ColumnSpan="2" behaviors:SelectAllFocusBehavior.Enable="True">
+                            <TextBox.Text>
+                                <Binding Path="Invoice.AmountAfterTax" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged" Delay="1000" ConverterCulture="gu-IN" StringFormat="c">
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+
+                </Grid>
+
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button Width="150" Content="{Binding ButtonState}" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding BtnSaveCommand}" Margin="0"/>
+                    <Button Width="150" Margin="5,10" Content="Add" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding BtnAddCommand}"/>
+                    <Button Width="150" Content="Clear" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding BtnClearCommand}"  Margin="5,10"/>
+                </StackPanel>
+
+                <DataGrid Grid.Row="3" Grid.ColumnSpan="2" Height="auto"  Width="auto" RowBackground="#e4ffcf" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridInvoices}" IsSynchronizedWithCurrentItem="True" Margin="0,15" AlternationCount="{Binding GridInvoices.Count}">
+                    <DataGrid.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding GridLeftDoubleClickCommand}" CommandParameter="{Binding GridInvoices/}"/>
+                    </DataGrid.InputBindings>
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="C.No" Binding="{Binding DisplayNumber}" Width="10*"/>
+                        <DataGridTextColumn Header="Product" Binding="{Binding Product}" Width="10*"/>
+                        <DataGridTextColumn Header="Weight" Binding="{Binding Weight}" Width="10*"/>
+                        <DataGridTextColumn Header="Rate" Binding="{Binding Rate, ConverterCulture='gu-IN' ,StringFormat=c}" Width="10*"/>
+                        <DataGridTextColumn Header="AmountBT" Binding="{Binding AmountBeforeTax, ConverterCulture='gu-IN' ,StringFormat=c}"  Width="15*"/>
+                        <DataGridTextColumn Header="IGST" Binding="{Binding IGST, ConverterCulture='gu-IN' ,StringFormat=c}" Width="10*"/>
+                        <DataGridTextColumn Header="SGST" Binding="{Binding SGST, ConverterCulture='gu-IN' ,StringFormat=c}" Width="10*"/>
+                        <DataGridTextColumn Header="CGST" Binding="{Binding CGST, ConverterCulture='gu-IN' ,StringFormat=c}" Width="10*"/>
+                        <DataGridTextColumn Header="AmountAT" Binding="{Binding AmountAfterTax, ConverterCulture='gu-IN' ,StringFormat=c}" Width="15*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

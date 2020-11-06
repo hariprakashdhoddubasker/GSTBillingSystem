@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        .print {
+            width: 140px;
+            height: 35px;
+            line-height: 32px;
+            text-align: center;
+            border: none;
+            border-radius: 20px;
+            background: #f60;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .staticText {
+            color: #2D2852;
+        }
+
+        .pageText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .pageTextBold {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            padding: 5px;
+            font-weight: 800;
+        }
+
+        .subHeadingText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            padding: 5px;
+            font-weight: 800;
+            color: #2D2852;
+        }
+
+        td {
+            height: 25px;
+            padding: 5px;
+        }
+
+        @media print {
+            table {
+                page-break-after: auto
+            }
+
+            tr {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            td {
+                page-break-inside: avoid;
+                page-break-after: auto
+            }
+
+            thead {
+                display: table-header-group
+            }
+
+            tfoot {
+                display: table-footer-group
+            }
+        }
+    </style>
+    <script>
+        function printDiv() {
+            var mywindow = window.open();
+            var is_chrome = Boolean(mywindow.chrome);
+            var tab = document.getElementById('panel');
+            mywindow.document.write('<html>');
+            mywindow.document.write('<head><style type="text/css">.staticText {color: #2D2852;}');
+            mywindow.document.write('.pageText {font-family: Helvetica, Arial, sans-serif; font-size: 13px;}');
+            mywindow.document.write('.pageTextBold {font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 5px;font-weight: 800;}');
+            mywindow.document.write('.subHeadingText {font-family: Helvetica, Arial, sans-serif;font-size: 14px;padding: 5px;font-weight: 800;color: #2D2852;}');
+            mywindow.document.write('@media print{table { page-break-after:auto }');
+            mywindow.document.write('tr    { page-break-inside:avoid; page-break-after:auto }');
+            mywindow.document.write('td    { page-break-inside:avoid; page-break-after:auto }');
+            mywindow.document.write('thead { display:table-header-group }');
+            mywindow.document.write('tfoot { display:table-footer-group }}');
+            mywindow.document.write('td {height: 25px;padding: 5px;}</style></head>');
+            mywindow.document.write('<body><h4>GST Bill Statement</h4><br>');
+            mywindow.document.write(tab.outerHTML);
+            mywindow.document.write('</body></html>');
+            if (is_chrome) {
+                setTimeout(function () {
+                    mywindow.document.close();
+                    mywindow.focus();
+                    mywindow.print();
+                    mywindow.close();
+                }, 250);
+            } else {
+                mywindow.document.close();
+                mywindow.focus();
+                mywindow.print();
+                mywindow.close();
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!--<div onclick="printDiv()" class="print">Print Invoice</div>-->
+    <h4>GST Bill Statement</h4>
+    <div id="panel">
+        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="tb">
+            <tbody>
+                <tr class="staticText">
+                    <th height="35" colspan="4" align="center" class="txt" style="border-bottom:1px solid #ddd; font-weight:800; font-family: Helvetica, Arial, sans-serif;">
+                        <img align="left" style="padding: 2% 0 0 1%;" height="90" src="data:image/jpeg;base64,|InvoiceVinayagarImageData|">
+                        <img align="right" style="padding: 2% 1% 0 0;" height="90" src="data:image/jpeg;base64,|InvoiceCompanySymbolImageData|">
+                        <img align="center" style="padding:1px;" height="40" src="data:image/jpeg;base64,|InvoiceOmImageData|"><br>
+                        <span style="font-size: 15px;">Gst Bill Statement</span><br>
+                        <span style="font-size: 40px;">RISHI SILVERS</span><br>
+                        <span>Silver Anklets & Ornaments Manufactures</span><br>
+                        <span>101, Sambalingamoorthy Street, Shevapet, Salem, Tamil Nadu - 636002.</span><br>
+                        <span>GSTIN No : 33AGPR9649R1Z2 &nbsp;Cell : 9003344881</span><br>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="1%">&nbsp;</td>
+                    <td colspan="2">
+                        <table style="border: 1px solid #999999; table-layout:auto;width:100%;" border="1" cellpadding="0" cellspacing="0" class="pageText">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong><span class="staticText">Date</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">Bill No</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">Customer Name</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">Amount Before Tax</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">IGST</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">CGST</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">SGST</span></strong>
+                                    </td>
+                                    <td>
+                                        <strong><span class="staticText">Amount After Tax</span></strong>
+                                    </td>
+                                </tr>|GstBillDetails|
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="1%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

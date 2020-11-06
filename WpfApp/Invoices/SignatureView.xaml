@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="WpfApp.Invoices.SignatureView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+    </UserControl.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <Grid Margin="15,0,15,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="SIGNATURE REGISTRATION" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="Gray" FontSize="18" Grid.Row="0"/>
+                <Grid VerticalAlignment="Center" Margin="15,0,15,0" Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="37*"/>
+                            <RowDefinition Height="32*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Margin="5,10,5,10" materialDesign:HintAssist.Hint="SIGNATURE FILE PATH" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Signature.SignatureFilePath, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Grid.RowSpan="2">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding Path=UpdateSignatureCommand}" Key="Enter" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <Button Margin="0,23,0,14"  Width="41" Content="..." Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding BtnOpenFileDialogCommand}" Grid.Column="1"/>
+                    </Grid>
+                    <Button Width="150" Margin="15"  HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Save" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding UpdateSignatureCommand}" Grid.Row="1"/>
+                </Grid>               
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

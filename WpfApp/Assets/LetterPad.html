@@ -1,0 +1,181 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Letter Pad</title>
+
+    <style type="text/css">
+        .print {
+            width: 140px;
+            height: 35px;
+            line-height: 32px;
+            text-align: center;
+            border: none;
+            border-radius: 20px;
+            background: #f60;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .pageText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            padding: 5px;
+            color: #000;
+        }
+
+        .pageTextBold {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            padding: 5px;
+            font-weight: 800;
+            color: #000;
+        }
+
+        .subHeadingText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 15px;
+            padding: 5px;
+            color: #d04e00;
+            font-weight: 800;
+        }
+
+        .st1 {
+            font-family: 'Segoe UI';
+            font-size: 15pt;
+            color: #000000;
+            font-weight: bold
+        }
+
+        .st2 {
+            font-family: 'Segoe UI';
+            font-size: 15pt;
+            color: #000000;
+        }
+
+        .st3 {
+            font-family: 'Segoe UI';
+            font-size: 15pt;
+            color: #000000;
+            font-style: italic
+        }
+
+        .st4 {
+            font-family: 'Segoe UI';
+            font-size: 15pt;
+            color: #000000;
+            ;
+            text-decoration: underline
+        }
+    </style>
+    <script>
+        function printDiv() {
+            var mywindow = window.open();
+            var is_chrome = Boolean(mywindow.chrome);
+            var tab = document.getElementById('panel');
+
+            mywindow.document.write('<html>');
+            mywindow.document.write('<style type="text/css">');
+            mywindow.document.write('.st1{font-family:"Segoe UI";font-size:15pt;color:#000000;font-weight:bold}');
+            mywindow.document.write('.st2{font-family:"Segoe UI";font-size:15pt;color:#000000;}');
+            mywindow.document.write('.st3{font-family:"Segoe UI";font-size:15pt;color:#000000;font-style:italic}');
+            mywindow.document.write('.st4{font-family:"Segoe UI";font-size:15pt;color:#000000;;text-decoration: underline}');
+            mywindow.document.write('</style>');
+            mywindow.document.write('<body><h4>|LetterPadCopyType|</h4><br>');
+            mywindow.document.write(tab.outerHTML);
+            mywindow.document.write('</body></html>');
+
+            if (is_chrome) {
+                setTimeout(function () { // wait until all resources loaded
+                    mywindow.document.close(); // necessary for IE >= 10
+                    mywindow.focus(); // necessary for IE >= 10
+                    mywindow.print();  // change window to winPrint
+                    mywindow.close();// change window to winPrint
+                }, 250);
+            }
+            else {
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10
+
+                mywindow.print();
+                mywindow.close();
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!--<div onclick="printDiv()" class="print">Print Invoice</div>-->
+    <h4>|LetterPadCopyType|</h4>
+    <div id="panel">
+        <table style="border:1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="tb">
+            <tbody>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td height="35" colspan="2" align="center" class="txt" style="color:#2D2852; font-weight:800; font-family: 'Muli', sans-serif;">
+                        <img align="left" style="padding: 2% 0 0 1%;" height="90" src="data:image/jpeg;base64,|InvoiceVinayagarImageData|">
+                        <img align="right" style="padding: 2% 1% 0 0;" height="90" src="data:image/jpeg;base64,|InvoiceCompanySymbolImageData|">
+                        <img align="center" style="padding:1px;" height="40" src="data:image/jpeg;base64,|InvoiceOmImageData|"><br>
+                        <span style="font-size: 15px; color:#2D2852;">Letter Pad</span><br>
+                        <span style="font-size: 40px; color:#2D2852;">RISHI SILVERS</span><br>
+                        <span>Silver Anklets & Ornaments Manufactures</span><br>
+                        <span>101, Sambalingamoorthy Street, Shevapet, Salem, Tamil Nadu - 636002.</span><br>
+                        <span>GSTIN No : 33AGPR9649R1Z2 &nbsp; Cell : 9003344881</span>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td width="75%" height="550px" style="vertical-align: top; font-size: 25px; padding-Left: 10px; border:1px solid #999999;" colspan="2">
+                        <span style="float:right; padding: 15px;">|LetterPadDate|</span><br>
+                        |LetterPadContent|
+                    </td>
+                    </td>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td>&nbsp;</td>
+                    <td width="30%" align="left">
+                        <table style="border:1px solid #999999; color:#2D2852;" border="1" cellpadding="0" cellspacing="0" class="tb2">
+                            <tbody>
+                                <tr>
+                                    <td height="100px" width="150px" valign="bottom" style="border-top: none; padding:5px;"><strong>Worker Signature</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="30%" align="right">
+                        <table style="border:1px solid #999999;" border="1" cellpadding="0" cellspacing="0" class="tb2">
+                            <tbody>
+                                <tr>
+                                    <td height="100px" width="150px" valign="bottom" style="border-top: none; padding:5px; color:#2D2852;">
+                                        <img align="center" width="100%" height="100%" src="|LetterPadSignature|" />
+                                        <strong>Authorised Signature</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="4">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

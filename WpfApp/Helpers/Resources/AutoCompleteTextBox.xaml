@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
                     xmlns:controls="clr-namespace:WpfApp.Helpers.Controls">
-    
+
     <Style TargetType="{x:Type controls:AutoCompleteTextBox}">
         <Setter Property="Template">
             <Setter.Value>
@@ -16,7 +16,7 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Input TextBoxt -->
-                        <TextBox x:Name="TXT_SEARCHINPUT"  materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="0" Text="{Binding SearchString}"></TextBox>
+                        <TextBox x:Name="TXT_SEARCHINPUT"  materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="0" Text="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                         <!-- Popup to display records-->
                         <Popup x:Name="PUP_AC" 
                                StaysOpen="False"
@@ -35,9 +35,7 @@
                                 <Border x:Name="PUP_BDR" Grid.Row="0" Grid.Column="0"
                                     BorderThickness="1" BorderBrush="#FFF4F4F4" Background="#FFFCFCFC" >
                                 </Border>
-
-                                <!-- DataGrid For AutoComplete List-->
-                                <DataGrid x:Name="DG_AC"  Grid.Row="0" Grid.Column="0" 
+                                <DataGrid x:Name="DG_AC"  Grid.Row="0" Grid.Column="0" IsReadOnly="True"
                                           Width="{Binding Path=AutoCompleteWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                           Height="{Binding Path=AutoCompleteHeight, RelativeSource={RelativeSource TemplatedParent}}"
                                           AutoGenerateColumns="False"  

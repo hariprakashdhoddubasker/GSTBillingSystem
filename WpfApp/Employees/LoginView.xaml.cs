@@ -18,5 +18,10 @@ namespace WpfApp.Employees
             var ctrl = (PasswordBox)sender;
             ((LoginViewModel)this.DataContext).Employee.Password = ctrl.Password;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ((LoginViewModel)this.DataContext).Employee.Password = txtPassword.Password;
+        }
     }
 }

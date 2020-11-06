@@ -1,0 +1,127 @@
+﻿<UserControl x:Class="WpfApp.Invoices.InvoiceReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:WpfApp.Helpers.Controls" 
+             xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <b:Interaction.Triggers>
+        <b:EventTrigger EventName="Loaded">
+            <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
+        </b:EventTrigger>
+    </b:Interaction.Triggers>
+
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.8}">
+            <Grid  Margin="15,0,15,0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label Content="CUSTOMER INVOICE REPORT" HorizontalAlignment="left" VerticalAlignment="Top" Margin="0,5,0,0" Foreground="Gray" FontSize="18" Grid.Row="0"/>
+
+                <Grid VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="15,0,15,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <controls:AutoCompleteTextBox x:Name="txt" Margin="0,10" AutoCompleteWidth="{Binding ElementName=txt, Path=ActualWidth}" AutoCompleteHeight="150" AutoCompletePlacementTarget="{Binding ElementName=txt}" AutoCompletePlacement="Bottom" AutoCompleteItemSource ="{Binding GridCustomers}" Grid.Row="0" Grid.Column="0" SelectedItem="{Binding Customer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SearchText="{Binding SearchString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding IsAutoCompleteTextBoxEnabled}">
+                            <controls:AutoCompleteTextBox.AutoCompleteColumns>
+                                <DataGridTextColumn Header="Id" MinWidth="60" Width="Auto" Binding="{Binding CustomerId}"/>
+                                <DataGridTextColumn Header="Full Name" Width="*" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Mobile Number" Width="150" Binding="{Binding MobileNumber}"/>
+                                <DataGridTextColumn Header="Date Of Birth" Width="150" Binding="{Binding DOB, StringFormat=\{0:dd MMM yyyy\}}"/>
+                            </controls:AutoCompleteTextBox.AutoCompleteColumns>
+                        </controls:AutoCompleteTextBox>
+
+                        <StackPanel  Margin="5,30,5,0"  Grid.Row="0"  Grid.Column="1" >
+                            <CheckBox IsChecked="{Binding IsAllFilter}" materialDesign:CheckBoxAssist.CheckBoxSize="25" FontSize="18">
+                                All
+                            </CheckBox>
+                        </StackPanel>
+
+                        <DatePicker materialDesign:HintAssist.Hint="FROM" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,7,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18"  Width="Auto" SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="2"/>
+
+                        <DatePicker materialDesign:HintAssist.Hint="TO" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,7,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Grid.Column="3"/>
+                        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="0,10">
+                            <Button Width="150" Content="SEARCH" Margin="5" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding Path = BtnSearchCommand}"/>
+                            <Button Width="150" Content="DOWNLOAD" Margin="5" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding Path = DownloadCommand}" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <DataGrid  Grid.Row="2" Grid.ColumnSpan="2" Height="auto"  Width="auto" RowBackground="#e4ffcf" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridGstBills}"  IsSynchronizedWithCurrentItem="True" Margin="0,15">
+                    <b:Interaction.Triggers>
+                        <b:EventTrigger EventName="RowEditEnding" >
+                            <b:InvokeCommandAction Command="{Binding GridRowEditEndingCommand}" />
+                        </b:EventTrigger>
+                    </b:Interaction.Triggers>
+                    <DataGrid.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick" Command="{Binding GridUpdateCommand}" CommandParameter="{Binding GridGstBills/}"/>
+                    </DataGrid.InputBindings>
+                    <DataGrid.Resources>
+                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}" />
+                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Delete">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Delete" Height="25" Width="60" FontSize="10"  Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.GridRowDeleteCommand}" CommandParameter="{Binding}" Background="{StaticResource PrimaryHueDarkBrush}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="Print">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Print" Height="25" Width="60" FontSize="10"  Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.GridRowPrintCommand}" CommandParameter="{Binding}" Background="{StaticResource PrimaryHueDarkBrush}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Date" Binding="{Binding GstDate, StringFormat=\{0:ddMMMyyyy\}}" Width="*"/>
+                        <DataGridTextColumn Header="Bill No" IsReadOnly="True" Binding="{Binding BillSerialNumber}"  Width="*"/>
+                        <DataGridTextColumn Header="Customer Name" IsReadOnly="True" Binding="{Binding Customer}" Width="*"/>
+                        <DataGridTextColumn Header="Before Tax" IsReadOnly="True" Binding="{Binding AmountAfterTax, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                        <DataGridTextColumn Header="IGST" IsReadOnly="True" Binding="{Binding IGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                        <DataGridTextColumn Header="SGST" IsReadOnly="True" Binding="{Binding SGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                        <DataGridTextColumn Header="CGST" IsReadOnly="True" Binding="{Binding CGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                        <DataGridTextColumn Header="After Tax" IsReadOnly="True" Binding="{Binding AmountAfterTax, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

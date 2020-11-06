@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Input;
 using WpfApp.Helpers;
 using WpfApp.Model;
@@ -11,6 +12,8 @@ namespace WpfApp.Registration
     public class CustomerRegistrationViewModel : BaseViewModel
     {
         private ICustomerRepository myCustomerRepo;
+        private IStateRepository myStateRepository;
+
         public ICommand BtnSaveUpdateCommand { get; }
         public ICommand BtnDeleteCommand { get; }
         public ICommand GridUpdateCommand { get; }
@@ -18,10 +21,13 @@ namespace WpfApp.Registration
         private ObservableCollection<Customer> myGridCustomers;
         private string myButtonState;
         private Customer myCustomer;
+        private ObservableCollection<State> myComboStates;
+        private State mySelectedState;
 
-        public CustomerRegistrationViewModel(ICustomerRepository customerRepo)
+        public CustomerRegistrationViewModel(ICustomerRepository customerRepo, IStateRepository stateRepository)
         {
             myCustomerRepo = customerRepo;
+            myStateRepository = stateRepository;
             this.Customer = new Customer();
             this.BtnSaveUpdateCommand = new Command(this.BtnSaveUpdateClick, this.IsValidCustomer);
             this.BtnDeleteCommand = new Command(this.BtnDeleteClick, this.IsValidCustomer);
@@ -47,11 +53,37 @@ namespace WpfApp.Registration
             get => this.myGridCustomers;
             set => SetProperty(ref myGridCustomers, value);
         }
+        public ObservableCollection<State> ComboStates
+        {
+            get => this.myComboStates;
+            set => SetProperty(ref myComboStates, value);
+        }
+
+        public State SelectedState
+        {
+            get => this.mySelectedState;
+            set
+            {
+                SetProperty(ref mySelectedState, value);
+                if (value == null)
+                {
+                    return;
+                }
+                Customer.StateId = mySelectedState.StateId;
+                ((Command)this.BtnSaveUpdateCommand).RaiseCanExecuteChanged();
+            }
+        }
 
         public async void Load()
         {
             Clear();
             GridCustomers = new ObservableCollection<Customer>(await myCustomerRepo.GetAllAsync());
+            ComboStates = new ObservableCollection<State>(await myStateRepository.GetAllAsync());
+
+            foreach (var customer in GridCustomers)
+            {
+                customer.State = ComboStates.FirstOrDefault(state => state.StateId == customer.StateId);
+            }
         }
 
         private void Customer_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -65,15 +97,13 @@ namespace WpfApp.Registration
         private bool IsValidCustomer(object arg)
         {
             return !string.IsNullOrEmpty(Customer.Name) &&
-                Customer.DOB != null &&
-                Customer.DOJ != null &&
-                long.TryParse(Customer.MobileNumber.ToString(), out _) &&
-                Customer.MobileNumber.ToString().Length == 10 &&
-                int.TryParse(Customer.EmployeeId.ToString(), out _);
+                    !string.IsNullOrEmpty(Customer.Address) &&
+                    Customer.StateId != 0;
         }
 
         private void BtnSaveUpdateClick(object obj)
         {
+            Customer.State = ComboStates.FirstOrDefault(state => state.StateId == Customer.StateId);
             if (ButtonState == "SAVE")
             {
                 myCustomerRepo.AddAsync(Customer);
@@ -93,16 +123,9 @@ namespace WpfApp.Registration
             Load();
         }
 
-        private void Clear()
+        public void Clear()
         {
-            Customer.CustomerId = 0;
-            Customer.Name = string.Empty;
-            Customer.DOB = DateTime.Now;
-            Customer.DOJ = DateTime.Now;
-            Customer.EmployeeId = 0;
-            Customer.MobileNumber = 0;
-            Customer.BalanceAmount = 0;
-            Customer.TotalAmountPaid = 0;
+            Customer = new Customer();
 
             this.ButtonState = "SAVE";
             RaiseCanExecuteChanged();
@@ -111,6 +134,7 @@ namespace WpfApp.Registration
         private void GridUpdate(object customer)
         {
             this.Customer = (Customer)customer;
+            this.SelectedState = Customer.State;
             this.ButtonState = "UPDATE";
             RaiseCanExecuteChanged();
         }

@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+        .print {
+            width: 140px;
+            height: 35px;
+            line-height: 32px;
+            text-align: center;
+            border: none;
+            border-radius: 20px;
+            background: #f60;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .staticText {
+            color: #2D2852;
+        }
+
+        .pageText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+        }
+
+        .pageTextBold {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 13px;
+            padding: 5px;
+            font-weight: 800;
+        }
+
+        .subHeadingText {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            padding: 5px;
+            font-weight: 800;
+            color: #2D2852;
+        }
+
+        td {
+            height: 25px;
+        }
+    </style>
+    <script>
+        function printDiv() {
+            var mywindow = window.open();
+            var is_chrome = Boolean(mywindow.chrome);
+            var tab = document.getElementById('panel');
+            mywindow.document.write('<html>');
+            mywindow.document.write('<head><style type="text/css">.staticText {color: #2D2852;}');
+            mywindow.document.write('.pageText {font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 5px; }');
+            mywindow.document.write('.pageTextBold {font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 5px;font-weight: 800;}');
+            mywindow.document.write('.subHeadingText {font-family: Helvetica, Arial, sans-serif;font-size: 14px;padding: 5px;font-weight: 800;color: #2D2852;}');
+            mywindow.document.write('td {height: 25px;}</style></head>');
+            mywindow.document.write('<body><h4>|InvoiceFileType|</h4><br>');
+            mywindow.document.write(tab.outerHTML);
+            mywindow.document.write('</body></html>');
+            if (is_chrome) {
+                setTimeout(function () {
+                    mywindow.document.close();
+                    mywindow.focus();
+                    mywindow.print();
+                    mywindow.close();
+                }, 250);
+            } else {
+                mywindow.document.close();
+                mywindow.focus();
+                mywindow.print();
+                mywindow.close();
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <!--<div onclick="printDiv()" class="print">Print Invoice</div>-->
+    <h4>|InvoiceFileType|</h4>
+    <div id="panel">
+        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="tb">
+            <tbody>
+                <tr class="staticText">
+                    <td height="35" colspan="4" align="center" class="txt" style="border-bottom:1px solid #ddd; font-weight:800; font-family: Helvetica, Arial, sans-serif;">
+                        <img align="left" style="padding: 2% 0 0 1%;" height="90" src="data:image/jpeg;base64,|InvoiceVinayagarImageData|">
+                        <img align="right" style="padding: 2% 1% 0 0;" height="90" src="data:image/jpeg;base64,|InvoiceCompanySymbolImageData|">
+                        <img align="center" style="padding:1px;" height="40" src="data:image/jpeg;base64,|InvoiceOmImageData|"><br>
+                        <span style="font-size: 15px;">Tax Invoice</span><br>
+                        <span style="font-size: 40px;">RISHI SILVERS</span><br>
+                        <span>Silver Anklets & Ornaments Manufactures</span><br>
+                        <span>101, Sambalingamoorthy Street, Shevapet, Salem, Tamil Nadu - 636002.</span><br>
+                        <span>GSTIN No : 33AGPR9649R1Z2 &nbsp;Cell : 9003344881</span><br>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td colspan="2">
+                        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="pageText">
+                            <tbody>
+                                <tr>
+                                    <td width="30%">
+                                        <strong>
+                                            <span class="staticText">Invoice Serial : </span>
+                                        </strong>
+                                        <span>|InvoiceSerialNo|</span>
+                                    </td>
+                                    <td width="0.2%">&nbsp;</td>
+                                    <td width="30%">
+                                        <strong>
+                                            <span class="staticText">Invoice Date : </span>
+                                        </strong>
+                                        <span>|InvoiceDate|</span>
+                                    </td>
+                                    <td width="0.2%">&nbsp;</td>
+                                    <td width="39.6%">
+                                        <strong>
+                                            <span class="staticText">Tax is Payable on Reverse Charge : </span>
+                                        </strong>
+                                        <span>|IsInvoiceTaxPayableReverse|</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td width="2%">&nbsp;</td>
+
+                    <td colspan="2">
+                        <strong>
+                            <span class="staticText">Details of Receiver (Billed To)</span>
+                        </strong>
+                    </td>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td colspan="2">
+                        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="pageText">
+                            <tbody>
+                                <tr>
+                                    <td width="20%">
+                                        <strong>
+                                            <span class="staticText">Client Name</span>
+                                        </strong>
+                                    </td>
+                                    <td width="80%">
+                                        <span>|InvoiceClientName|</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td colspan="2">
+                        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="pageText">
+                            <tbody>
+                                <tr>
+                                    <td width="20%">
+                                        <strong>
+                                            <span class="staticText">Address</span>
+                                        </strong>
+                                    </td>
+                                    <td width="80%">
+                                        <span>|InvoiceAddress|</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td colspan="2">
+                        <table style="border: 1px solid #999999;" width="100%" border="0" cellpadding="0" cellspacing="0" class="pageText">
+                            <tbody>
+                                <tr>
+                                    <td width="20%">
+                                        <strong>
+                                            <span class="staticText">State</span>
+                                        </strong>
+                                    </td>
+                                    <td width="20%">
+                                        <span>|InvoiceState|</span>
+                                    </td>
+                                    <td width="25%">
+                                        <strong>
+                                            <span class="staticText">State Code &nbsp;</span>
+                                        </strong>
+                                        <span>32</span>
+                                    </td>
+                                    <td width="35%">
+                                        <strong>
+                                            <span class="staticText">GSTIN No &nbsp;</span>
+                                        </strong>
+                                        <span>|InvoiceGSTIN|</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <td width="2%">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td width="2%">&nbsp;</td>
+                    <td colspan="2" align="right" width="30%">
+                        <table style="border: 1px solid #999999;" width="100%" border="1" cellpadding="0" cellspacing="0">
+                            <tbody>
+                                <tr class="subHeadingText">
+                                    <td width="10%" align="center">
+                                        <strong>
+                                            <span>S.No</span>
+                                        </strong>
+                                    </td>
+                                    <td width="40%" align="center">
+                                        <strong>
+                                            <span>Description of Goods</span>
+                                        </strong>
+                                    </td>
+                                    <td width="12.5%" align="center">
+                                        <strong>
+                                            <span>HSN Code</span>
+                                        </strong>
+                                    </td>
+                                    <td width="12.5%" align="center">
+                                        <strong>
+                                            <span>Weight (in Kg)</span>
+                                        </strong>
+                                    </td>
+                                    <td width="12.5%" align="center">
+                                        <strong>
+                                            <span>Rate</span>
+                                        </strong>
+                                    </td>
+                                    <td width="12.5%" align="center">
+                                        <strong>
+                                            <span>Amount</span>
+                                        </strong>
+                                    </td>
+                                </tr>|InvoiceProductDetails|
+                                <tr class="pageText">
+                                    <td width="50%" align="center" rowspan="2" colspan="2">
+                                        <strong>
+                                            <span class="staticText">Rupees : |InvoiceProductAmountInWords|.</span>
+                                        </strong>
+                                    </td>
+                                    <td width="25%" colspan="2" style="padding-Left: 10px;" align="Left">
+                                        <strong>
+                                            <span class="staticText">Total Amount Before Tax</span>
+                                        </strong>
+                                    </td>
+                                    <td width="25%" colspan="2" style="padding-Right: 10px;" align="Right">
+                                        <span>|InvoiceTotalAmountBeforeTax|</span>
+                                    </td>
+                                </tr>
+                                <tr class="pageText">
+                                    <td width="25%" align="Left" style="padding-Left: 10px;" colspan="2" class="staticText">
+                                        <strong>
+                                            <span>IGST : 3%</span>
+                                        </strong>
+                                    </td>
+                                    <td width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                                        <span>|InvoiceIGST|</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="50%" rowspan="5" colspan="2" align="center" class="staticText">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-left: 10px;font-size: 12px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="35%" align="left">
+                                                        <strong>
+                                                            <span>
+                                                                <u>Bank Details</u>
+                                                            </span>
+                                                        </strong>
+                                                    </td>
+                                                    <td width="50%">&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span>Name</span>
+                                                        </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>HDFC Bank</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span>Branch</span>
+                                                        </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>Shevapet</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span>A/c No</span>
+                                                        </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>50200025339691</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>
+                                                            <span>IFSC</span>
+                                                        </strong>
+                                                    </td>
+                                                    <td>
+                                                        <span>HDFC 0003675</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td class="pageText" width="25%" colspan="2" style="padding-Left: 10px;" align="Left" class="staticText">
+                                        <strong>
+                                            <span>SGST : 1.5 %</span>
+                                        </strong>
+                                    </td>
+                                    <td class="pageText" width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                                        <span>|InvoiceSGST|</span>
+                                    </td>
+                                </tr>
+                                <tr class="pageText">
+                                    <td width="25%" colspan="2" style="padding-Left: 10px;" align="Left" class="staticText">
+                                        <strong>
+                                            <span>CGST : 1.5 %</span>
+                                        </strong>
+                                    </td>
+                                    <td width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                                        <span>|InvoiceCGST|</span>
+                                    </td>
+                                </tr>
+                </tr>
+                <tr class="pageText">
+                    <td width="25%" colspan="2" style="padding-Left: 10px;" align="Left" class="staticText">
+                        <strong>
+                            <span>Total Tax Amount</span>
+                        </strong>
+                    </td>
+                    <td width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                        <span>|InvoiceTotalTaxAmount|</span>
+                    </td>
+                </tr>
+                <tr class="pageText">
+                    <td width="25%" colspan="2" style="padding-Left: 10px;" align="Left" class="staticText">
+                        <strong>
+                            <span>Round Off</span>
+                        </strong>
+                    </td>
+                    <td width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                        <span>|InvoiceRoundOff|</span>
+                    </td>
+                </tr>
+                <tr class="pageText">
+                    <td width="25%" colspan="2" style="padding-Left: 10px;" align="Left" class="staticText">
+                        <strong>
+                            <span>Total Amount after Tax</span>
+                        </strong>
+                    </td>
+                    <td width="25%" colspan="2" style="padding-right: 10px;" align="right">
+                        <span>|InvoiceTotalAmountAfterTax|</span>
+                    </td>
+                </tr>
+                </tr>
+            </tbody>
+        </table></td><td width="2%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="2%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="2%">&nbsp;</td>
+            <td colspan="2" class="staticText">
+                <table style="border: 1px solid #999999;" width="100%" border="1" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <tr class="pageText">
+                            <td width="75%" style="padding-Left:10px;" align="Left" rowspan="2">
+                                <strong>
+                                    <span>Terms and Conditions for Sales</span>
+                                </strong>
+                                <span class="pageText">
+                                    <p>
+                                        1. Subject to Salem Jurisdiction<br>
+                                        2. Goods once sold cannot be taken back<br>
+                                        3. Payment of the invoice can be made be cheque / NEFT / RTGS / Cash upto 10,000<br>4. As per Serial No 4 &5 of Annexure to Rule No 138(14) of CGST Rules, 2017 E way bill not required to be generated for items included in this invoice.
+                                    </p>
+                                </span>
+                            </td>
+                            <td width="25%" valign="top">
+                                <strong class="pageText">
+                                    <span>For RISHI SILVERS</span>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="bottom" style="border-top: none; padding:5px; height:100px !important;">
+                                <img align="center" width="100%" height="100%" src="data:image/jpeg;base64,|InvoiceSignatureData|" />
+                                <strong class="pageText">
+                                    <span>Authorised Signature</span>
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td width="2%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="2%">&nbsp;</td>
+            <td colspan="2" class="staticText">This is a computer generated invoice</td>
+            <td width="2%">&nbsp;</td>
+        </tr>
+        <tr>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+        </tbody></table></td><td width="2%">&nbsp;</td>
+        </tr></tbody></table>
+</body>
+</html>

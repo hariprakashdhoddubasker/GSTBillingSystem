@@ -8,12 +8,18 @@ namespace WpfApp.Helpers
         Customer,
         [Description("Product")]
         Product,
+        [Description("State")]
+        State,
         [Description("Invoice")]
         Invoice,
-        [Description("Customer Invoice")]
+        [Description("Report")]
         CustomerInvoiceReport,
         [Description("BackUp")]
-        BackUp
+        BackUp,
+        [Description("Letter Pad")]
+        LetterPad,
+        [Description("Signature")]
+        Signature
     }
 
     public enum WpfAppRoles

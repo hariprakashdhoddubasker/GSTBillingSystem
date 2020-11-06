@@ -6,6 +6,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:validation="clr-namespace:WpfApp.Common.Validation"
+             xmlns:behaviors="clr-namespace:WpfApp.Common.Behaviors" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <b:Interaction.Triggers>
@@ -13,6 +14,9 @@
             <b:CallMethodAction TargetObject="{Binding}" MethodName="Load"/>
         </b:EventTrigger>
     </b:Interaction.Triggers>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+    </UserControl.InputBindings>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -36,53 +40,57 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0">
+                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+
+
+                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Customer.Address, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="0">
                         <TextBox.InputBindings>
                             <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
                         </TextBox.InputBindings>
                     </TextBox>
 
-                    <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MOBILE NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="1" Grid.Column="0">
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="MOBILE NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="1" behaviors:SelectAllFocusBehavior.Enable="True">
                         <TextBox.InputBindings>
                             <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
                         </TextBox.InputBindings>
                         <TextBox.Text>
                             <Binding Path="Customer.MobileNumber" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <validation:IntegerValidationRule ValidationStep="RawProposedValue" Length="10"/>
+                                    <validation:IntegerValidationRule ValidationStep="RawProposedValue" Length="10" Message="Please enter a valid Mobile number."/>
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
 
-                    <ComboBox  Margin="0,10" materialDesign:HintAssist.Hint="REFERRED BY" ItemsSource="{Binding ReferrableEmployees}"  SelectedValue="{Binding SelectedReferredEmployee}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="2" Grid.Column="0" SelectedIndex="{Binding ReferredBySelectedIndex}" SelectedItem="{Binding Customer.ReferredBy,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox Margin="5,10" materialDesign:HintAssist.Hint="GST NUMBER" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="1" Grid.Column="1">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
+                        </TextBox.InputBindings>
+                        <TextBox.Text>
+                            <Binding Path="Customer.GstNumber" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <validation:StringValidationRule ValidationStep="RawProposedValue" Length="15" Message="Please enter a valid GST number."/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <ComboBox  Margin="0,10" materialDesign:HintAssist.Hint="State" ItemsSource="{Binding ComboStates}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="2" Grid.Column="0" SelectedItem="{Binding SelectedState,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />
                             </ItemsPanelTemplate>
                         </ComboBox.ItemsPanel>
                     </ComboBox>
-
-                    <DatePicker materialDesign:HintAssist.Hint="DATE OF BIRTH" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,7,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18"  Grid.Row="0" Grid.Column="1"  SelectedDate="{Binding Customer.DOB, UpdateSourceTrigger=PropertyChanged}">
-                        <DatePicker.InputBindings>
-                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
-                        </DatePicker.InputBindings>
-                    </DatePicker>
-
-                    <DatePicker materialDesign:HintAssist.Hint="DATE OF JOIN" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Margin="5,6,0,0" FontFamily="Champagne &amp; Limousines" FontSize="18"  Grid.Row="1" Grid.Column="1"  SelectedDate="{Binding Customer.DOJ, UpdateSourceTrigger=PropertyChanged}">
-                        <DatePicker.InputBindings>
-                            <KeyBinding Command="{Binding Path=BtnSaveUpdateCommand}" Key="Enter" />
-                        </DatePicker.InputBindings>
-                    </DatePicker>
                 </Grid>
                 <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
-                    <Button Width="150" VerticalAlignment="Bottom" Margin="0,0,15,0" Content="{ Binding ButtonState}" Background="#FF78BE1F" Command="{Binding Path = BtnSaveUpdateCommand}"/>
-                    <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Delete" Background="#FF78BE1F" Command="{Binding Path = BtnDeleteCommand}" Grid.Row="2"/>
+                    <Button Width="150" VerticalAlignment="Bottom" Margin="0,0,15,0" Content="{ Binding ButtonState}" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding Path = BtnSaveUpdateCommand}"/>
+                    <Button Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Content="Delete" Background="{StaticResource PrimaryHueDarkBrush}" Command="{Binding Path = BtnDeleteCommand}" Grid.Row="2"/>
                 </WrapPanel>
-                <DataGrid Height="auto"  Width="auto" RowBackground="#e4ffcf" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridCustomers}" SelectedItem="{Binding SelectedEmployee}"  IsSynchronizedWithCurrentItem="True" Grid.Row="3" Margin="0,15">
+                <DataGrid Height="auto"  Width="auto"  RowBackground="{StaticResource PrimaryHueLightBrush}" AlternatingRowBackground="White" IsReadOnly="True" SelectionMode="Extended" AutoGenerateColumns="False"  ItemsSource="{Binding GridCustomers}" IsSynchronizedWithCurrentItem="True" Grid.Row="3" Margin="0,15">
                     <DataGrid.Resources>
                         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="#78BE1F" />
+                            <Setter Property="Background" Value="{StaticResource PrimaryHueDarkBrush}" />
                             <Setter Property="Foreground" Value="White" />
                             <Setter Property="FontWeight" Value="Bold" />
                         </Style>
@@ -91,12 +99,12 @@
                         <MouseBinding Gesture="LeftDoubleClick" Command="{Binding GridUpdateCommand}" CommandParameter="{Binding GridCustomers/}"/>
                     </DataGrid.InputBindings>
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Id" Binding="{Binding CustomerId}" Width="*"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
-                        <DataGridTextColumn Header="Mobile No" Binding="{Binding MobileNumber}" Width="*"/>
-                        <DataGridTextColumn Header="DOB" Binding="{Binding DOB, StringFormat=\{0:ddMMMyyyy\}}"  Width="*"/>
-                        <DataGridTextColumn Header="DOJ" Binding="{Binding DOJ, StringFormat=\{0:ddMMMyyyy\}}"  Width="*"/>
-                        <DataGridTextColumn Header="Referred By" Binding="{Binding Employee.UserName}"  Width="*"/>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="2*"/>
+                        <DataGridTextColumn Header="Mobile No" Binding="{Binding MobileNumber}" Width="1*"/>
+
+                        <DataGridTextColumn Header="Address" Binding="{Binding Address}"  Width="4*"/>
+                        <DataGridTextColumn Header="GST Number" Binding="{Binding GstNumber}"  Width="2*"/>
+                        <DataGridTextColumn Header="State" Binding="{Binding State.StateName}"  Width="1*"/>    
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

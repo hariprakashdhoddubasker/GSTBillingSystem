@@ -1,12 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>F:\3.SoniaPayals\Source\SoniaPayals\WpfApp\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
   <ItemGroup>
     <ApplicationDefinition Update="App.xaml">
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Common\BackUpRestoreView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Common\ContactView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Common\HeaderView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -22,11 +30,35 @@
     <Compile Update="Employees\LoginView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Invoices\InvoiceReportView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Invoices\InvoiceView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Invoices\LetterPadView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Invoices\SignatureView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Registration\CustomerRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Registration\ProductRegistrationView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Registration\StateRegistrationView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Common\BackUpRestoreView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Common\ContactView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Common\HeaderView.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -45,10 +77,28 @@
     <Page Update="Helpers\Resources\AutoCompleteTextBox.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Invoices\InvoiceReportView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Invoices\InvoiceView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Invoices\LetterPadView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Invoices\SignatureView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Registration\CustomerRegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Registration\ProductRegistrationView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Registration\StateRegistrationView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

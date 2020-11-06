@@ -24,6 +24,9 @@ namespace WpfApp.Helpers.Controls
         public static readonly DependencyProperty AutoCompleteHeightDependencyProperty = DependencyProperty.Register("AutoCompleteHeight", typeof(double), typeof(AutoCompleteTextBox));
         public static readonly DependencyProperty SearchTextProperty = DependencyProperty.Register("SearchText", typeof(string), typeof(AutoCompleteTextBox));
 
+        public static readonly DependencyProperty SetAutoCompleteTextProperty = DependencyProperty.Register("SetAutoCompleteText", typeof(string), typeof(AutoCompleteTextBox), new PropertyMetadata("", OnAutoCompleteSelectedTextChanged));
+        public static bool isSetFromCode = false;
+
         public ObservableCollection<DataGridColumn> AutoCompleteColumns
         {
             get
@@ -46,6 +49,27 @@ namespace WpfApp.Helpers.Controls
                 SetValue(AutoCompleteItemSourceProperty, value);
             }
         }
+
+        public string SetAutoCompleteText
+        {
+            get
+            {
+                return (string)GetValue(SetAutoCompleteTextProperty);
+            }
+            set
+            {
+                SetValue(SetAutoCompleteTextProperty, value);
+            }
+        }
+
+        private static void OnAutoCompleteSelectedTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Convert.ToString(e.NewValue)) && e.NewValue != e.OldValue)
+            {
+                ((AutoCompleteTextBox)d).PUP_AC.IsOpen = false;
+            }
+        }
+
         public string SearchText
         {
             get
@@ -72,6 +96,11 @@ namespace WpfApp.Helpers.Controls
                 {
                     TXT_SEARCHINPUT.Text = value.ToString();
                     TXT_SEARCHINPUT.Select(TXT_SEARCHINPUT.Text.Length, 0);
+                }
+
+                if (PUP_AC.IsOpen)
+                {
+                    PUP_AC.IsOpen = false;
                 }
 
                 if (this.OnSelectedItemChange != null)
@@ -126,6 +155,7 @@ namespace WpfApp.Helpers.Controls
                 SetValue(AutoCompleteHeightDependencyProperty, value);
             }
         }
+
         // allows programmer to filter records as per input
         public event TextChangedEventHandler OnTextChange;
         // to perform operation on ItemSelection Changed
@@ -221,8 +251,9 @@ namespace WpfApp.Helpers.Controls
             else
             {
                 PUP_AC.IsOpen = true;
+                SearchText = TXT_SEARCHINPUT.Text;
             }
-            SearchText = TXT_SEARCHINPUT.Text;
+
             if (this.OnTextChange != null)
                 this.OnTextChange.Invoke(sender, e);
         }

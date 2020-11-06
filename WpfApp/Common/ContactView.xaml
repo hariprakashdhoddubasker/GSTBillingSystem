@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="WpfApp.Common.ContactView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:validation="clr-namespace:WpfApp.Common.Validation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=BtnSendMessageCommand}" Key="Enter" />
+    </UserControl.InputBindings>
+    <Grid  Margin="0 -52 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Background="White">
+            <Border Margin="0 20 0 0" Width="130" Height="150" CornerRadius="0" BorderThickness="1" BorderBrush="Gray">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Assets/Hari.JPG"/>
+                </Border.Background>
+            </Border>
+
+            <TextBlock Text="About" HorizontalAlignment="Center" Margin="0 10 0 0" Foreground="Gray" FontSize="18" FontWeight="Bold"/>
+            <TextBlock Text="Software Engineer" FontSize="15" Foreground="Gray" HorizontalAlignment="Center" Opacity="0.8"/>
+            <TextBlock TextWrapping="Wrap" Text="Convert your ideas into workable solutions" FontSize="10" Foreground="Gray"  HorizontalAlignment="Center" Opacity="0.8"/>
+
+            <StackPanel Margin="20,20,0,0">
+                <TextBlock Text="Personal" Foreground="Gray" FontSize="15" FontWeight="Medium"/>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="Location" Foreground="Gray"/>
+                    <TextBlock Text="Shevapet, Salem, TN" FontSize="14" Margin="10 0" TextWrapping="Wrap" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="Cellphone" Foreground="Gray"/>
+                    <TextBlock Text="(+91) 8089947074" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="Email" Foreground="Gray"/>
+                    <TextBlock Text="hariprakashdb@gmail.com" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                <TextBlock Text="Professional" Foreground="Gray" FontSize="15" FontWeight="Medium"/>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="StarThreePoints" Foreground="Gray"/>
+                    <TextBlock Text="BE (CSE)" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="StarFourPoints" Foreground="Gray"/>
+                    <TextBlock Text="In Software industry Since 2014" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="Star" Foreground="Gray"/>
+                    <TextBlock Text="Senior Software Engineer" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="20,20,0,0" >
+                <TextBlock Text="Let's Build Something" Foreground="Gray" FontSize="15" FontWeight="Medium"/>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="LaptopWindows" Foreground="Gray"/>
+                    <TextBlock Text="Enterprise Software" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="Web" Foreground="Gray"/>
+                    <TextBlock Text="Website" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 3">
+                    <materialDesign:PackIcon Kind="CellphoneAndroid" Foreground="Gray"/>
+                    <TextBlock Text="Mobile App" Margin="10 0" FontSize="14" Foreground="Gray"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Background="{StaticResource PrimaryHueLightBrush}">
+            <StackPanel Orientation="Horizontal" Height="100" VerticalAlignment="Top"  Background="{StaticResource PrimaryHueLightBrush}">
+                <Border Width="10" Height="10" HorizontalAlignment="Right" Margin="15" Background="Green" CornerRadius="15" VerticalAlignment="Center"/>
+                <TextBlock Text="HARI PRAKASH" FontSize="28" VerticalAlignment="Center"/>
+            </StackPanel>
+            <Border Margin="0 100" VerticalAlignment="TOP">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Vertical" Margin="10">
+                        <TextBlock Text="GET IN TOUCH" Margin="10 0" FontSize="18" HorizontalAlignment="Center" Foreground="Gray" FontWeight="SemiBold"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MOBILE NO" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Grid.Row="0" Grid.Column="0">
+                            <TextBox.Text>
+                                <Binding Path="MobileNumber" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <validation:IntegerValidationRule ValidationStep="RawProposedValue" Length="10"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <TextBox Margin="0,10" materialDesign:HintAssist.Hint="MESSAGE" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18" Text="{Binding Message, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="0"/>
+                        <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Width="150" Content="SEND MESSAGE" Margin="0,50" Command="{Binding BtnSendMessageCommand}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Grid  Grid.Column="2" Background="{StaticResource PrimaryHueDarkBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="White">
+                <TextBlock Text="SIMPLE SOFTS" Margin="40" FontSize="18" HorizontalAlignment="Center" Foreground="Gray" FontWeight="SemiBold"/>
+            </StackPanel>
+
+            <Grid Margin="20,0,0,0" Grid.Row="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="20*"/>
+                </Grid.RowDefinitions>
+                <StackPanel  Grid.Row="0" >
+                    <TextBlock Text="Build Your Dreams" FontSize="15" Margin="10" Foreground="White" FontWeight="Medium" HorizontalAlignment="Right" Grid.Row="1"/>
+                    <TextBlock Margin="0 10" Text="Why Choose Us?" FontSize="18" Foreground="White"  FontWeight="Medium"/>
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="65*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Uniqueness" Grid.Row="0" Margin="0 15" Foreground="White" FontSize="16" Grid.ColumnSpan="2" FontWeight="Medium"/>
+
+                    <materialDesign:PackIcon Kind="SpiderWeb" Foreground="White"  Height="24"  Width="24"  Grid.Row="1" Grid.Column="0"  Background="{StaticResource PrimaryHueDarkBrush}"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="We Build a unique Application that confronts your difficult problems" Margin="10 0" FontSize="15" Foreground="White" Grid.Column="1"  Grid.Row="1"  />
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="65*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Customizable" Margin="0 15" Foreground="White" FontSize="16" FontWeight="Medium" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <materialDesign:PackIcon Kind="Tools"  Height="24"  Width="24" Foreground="White"  Grid.Row="1" Grid.Column="0"/>
+
+                    <TextBlock TextWrapping="Wrap" Text="Build More Than just a Software customized to your business" Margin="10 0" FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="65*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Support" Margin="0 15" Foreground="White" FontSize="16" FontWeight="Medium" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <materialDesign:PackIcon Kind="FaceAgent" Height="24"  Width="24" Foreground="White" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock TextWrapping="Wrap" Text="Got stuck on something? Have any Questions? We love to support you." Margin="10 0" FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45*"/>
+                        <RowDefinition Height="65*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="ON TIME DELIVERY" Margin="0 15" Foreground="White" FontSize="16" FontWeight="Medium" Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <materialDesign:PackIcon Kind="ClockOutline" Height="24"  Width="24" Foreground="White" Grid.Row="1" Grid.Column="0"/>
+                    <TextBlock TextWrapping="Wrap" Text="Get your software delivered on time bug free." Margin="10 0" FontSize="15" Foreground="White" Grid.Row="1" Grid.Column="1"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

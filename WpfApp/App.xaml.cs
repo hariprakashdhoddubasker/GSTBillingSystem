@@ -17,11 +17,11 @@ namespace WpfApp
     /// </summary>
     public partial class App : Application
     {
-        private readonly List<string> macIdList = new List<string>() { "C8D9D2EE9E6E"};
+        private readonly List<string> macIdList = new List<string>() { "C8D9D2EE9E6E", "3C2C30A22EB7", "B888E3CBC29D" };
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            const string appName = "NatureBox";
+            const string appName = Constants.WfpAppName;
             var _mutex = new Mutex(true, appName, out bool createdNew);
 
             if (!createdNew)
@@ -29,7 +29,9 @@ namespace WpfApp
                 MessageBox.Show("App is already running! Please click Ok to exit.");
                 Current.Shutdown();
             }
+
             var result = macIdList.Select(x => x).Intersect(GetMacAddress()).Any();
+
             if (!result)
             {
                 MessageBox.Show("MAC address mismatched, contact Admin. Please click Ok to exit.");

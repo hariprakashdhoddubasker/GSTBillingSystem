@@ -32,37 +32,63 @@ namespace WpfApp.Common
 
         internal StackPanel GetMenuItems()
         {
-            var registorSubItems = new List<SubItemViewModel>
+            var customerSubItems = new List<SubItemViewModel>
             {
                 new SubItemViewModel(WpfAppForms.Customer.GetDescription())
             };
 
+            var stateSubItems = new List<SubItemViewModel>
+            {
+                new SubItemViewModel(WpfAppForms.State.GetDescription())
+            };
+
+            var Invoice = new List<SubItemViewModel>
+            {
+                new SubItemViewModel(WpfAppForms.Invoice.GetDescription())
+            };
+
+            var productSubItems = new List<SubItemViewModel>
+            {
+                new SubItemViewModel(WpfAppForms.Product.GetDescription())
+            };
             var reportSubItems = new List<SubItemViewModel>
             {
                 new SubItemViewModel(WpfAppForms.CustomerInvoiceReport.GetDescription())
             };
 
-            var financialSubItems = new List<SubItemViewModel>
+            var backUpSubItems = new List<SubItemViewModel>
             {
-                new SubItemViewModel(WpfAppForms.Invoice.GetDescription())
+                new SubItemViewModel(WpfAppForms.BackUp.GetDescription())
             };
 
-            if (UIService.CurrentUser.Role == WpfAppRoles.Admin.ToString())
+            var letterPadSubItems = new List<SubItemViewModel>
             {
-                registorSubItems.Add(new SubItemViewModel(WpfAppForms.Product.GetDescription()));
+                new SubItemViewModel(WpfAppForms.LetterPad.GetDescription())
+            };
+            var signatureSubItems = new List<SubItemViewModel>
+            {
+                new SubItemViewModel(WpfAppForms.Signature.GetDescription())
+            };
 
-                reportSubItems.Add(new SubItemViewModel(WpfAppForms.BackUp.GetDescription()));
-
-            }
-
-            var financialItemMenu = new ItemMenuViewModel("FINANCIAL", financialSubItems, PackIconKind.ScaleBalance, myEventAggregator);
-            var registorItemMenu = new ItemMenuViewModel("REGISTER", registorSubItems, PackIconKind.Register, myEventAggregator);
-            var reportItemMenu = new ItemMenuViewModel("REPORTS", reportSubItems, PackIconKind.FileReport, myEventAggregator);
+            var customerItemMenu = new ItemMenuViewModel("CUSTOMER", customerSubItems, PackIconKind.AccountGroup, myEventAggregator);
+            var stateItemMenu = new ItemMenuViewModel("STATE", stateSubItems, PackIconKind.HomeMapMarker, myEventAggregator);
+            var InvoiceItemMenu = new ItemMenuViewModel("INVOICE", Invoice, PackIconKind.PodiumSilver, myEventAggregator);
+            var productItemMenu = new ItemMenuViewModel("PRODUCT", productSubItems, PackIconKind.CurrencyInr, myEventAggregator);
+            var reportItemMenu = new ItemMenuViewModel("REPORT", reportSubItems, PackIconKind.PrinterWireless, myEventAggregator);
+            var letterPadItemMenu = new ItemMenuViewModel("LETTER PAD", letterPadSubItems, PackIconKind.NoteMultiple, myEventAggregator);
+            var backUpItemMenu = new ItemMenuViewModel("BACKUP", backUpSubItems, PackIconKind.CloudUpload, myEventAggregator);
+            var signatureItemMenu = new ItemMenuViewModel("SIGNATURE", signatureSubItems, PackIconKind.SignatureImage, myEventAggregator);
 
             StackPanel stackPanel = new StackPanel();
-            stackPanel.Children.Add(new MenuView(registorItemMenu));
-            stackPanel.Children.Add(new MenuView(financialItemMenu));
+
+            stackPanel.Children.Add(new MenuView(InvoiceItemMenu));
+            stackPanel.Children.Add(new MenuView(customerItemMenu));
+            stackPanel.Children.Add(new MenuView(stateItemMenu));
+            stackPanel.Children.Add(new MenuView(productItemMenu));
             stackPanel.Children.Add(new MenuView(reportItemMenu));
+            stackPanel.Children.Add(new MenuView(letterPadItemMenu));            
+            stackPanel.Children.Add(new MenuView(backUpItemMenu));
+            stackPanel.Children.Add(new MenuView(signatureItemMenu));
             return stackPanel;
         }
     }

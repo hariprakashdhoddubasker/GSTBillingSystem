@@ -20,6 +20,7 @@ namespace WpfApp.Employees
             this.myEmployeeRepository = employeeRepository;
             this.BtnLoginCommand = new Command(this.BtnLoginClick, this.CanCheckCredencials);
             Employee.PropertyChanged += Employee_PropertyChanged;
+            Employee.UserName = "Rishi";
         }
 
         public ICommand BtnLoginCommand { get; }
