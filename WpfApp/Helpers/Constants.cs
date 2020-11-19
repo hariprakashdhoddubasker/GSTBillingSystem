@@ -77,7 +77,7 @@ namespace WpfApp.Helpers
         internal static string LetterPadHtmlFileName => AssertsFilePath + "LetterPad.html";
         internal static string GstBillStatementHtmlFileName => AssertsFilePath + "GstBillStatement.html";
         internal static string GanapathiImageFileName => AssertsFilePath + "Ganapathi_full.jpg";
-        internal static string WpfAppLogoImageFileName => AssertsFilePath + "Company_Symbol_small_full.png";
+        internal static string WpfAppLogoImageFileName => AssertsFilePath + "Company_Symbol_small_full.jpg";
         internal static string OmImageFileName => AssertsFilePath + "OM.jpg";
     }
 }

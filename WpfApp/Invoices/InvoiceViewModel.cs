@@ -14,6 +14,14 @@ using WpfApp.Helpers.HtmlService;
 using WpfApp.Invoices.Service;
 using WpfApp.Model;
 using WpfApp.Registration.Service;
+using System.Printing;
+using System.Windows.Controls;
+using System.Windows.Xps;
+using System.Windows.Documents;
+using System.IO.Packaging;
+using System.Windows.Xps.Packaging;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace WpfApp.Invoices
 {
@@ -45,6 +53,7 @@ namespace WpfApp.Invoices
         private IEventAggregator myEventAggregator;
         private string myButtonState;
         private string mySignatureFilePath;
+        private System.Windows.Forms.WebBrowser webBrowser;
 
         #endregion
 
@@ -77,6 +86,10 @@ namespace WpfApp.Invoices
             this.IsTaxPayableReverseItems = new ObservableCollection<string> { "Yes", "No" };
 
             this.ButtonState = "SAVE";
+            var t = new Thread(()=> { webBrowser = new System.Windows.Forms.WebBrowser(); });
+            t.SetApartmentState(ApartmentState.STA);
+            t.Start();
+          
         }
 
         #endregion
@@ -315,14 +328,27 @@ namespace WpfApp.Invoices
             ((Command)this.BtnSaveCommand).RaiseCanExecuteChanged();
             ((Command)this.BtnAddCommand).RaiseCanExecuteChanged();
 
+            Print(savedGstBill.GstBillFilePath);
+
             if (savedInvoices != null)
             {
-                UIService.ShowMessage("Invoice Saved");
                 if (ButtonState == "UPDATE")
                 {
                     ButtonState = "SAVE";
                 }
+                UIService.ShowMessage("Invoice Saved");
             }
+        }
+
+        void Print(string str)
+        {
+            webBrowser.DocumentText = File.ReadAllText(str);
+            webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
+        }
+
+        void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            ((System.Windows.Forms.WebBrowser)sender).ShowPrintPreviewDialog();
         }
 
         private void OnAddClick(object obj)
