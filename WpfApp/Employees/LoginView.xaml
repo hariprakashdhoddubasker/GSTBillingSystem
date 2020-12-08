@@ -48,6 +48,6 @@
 
         <TextBlock Text="RISHI SILVERS" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray"/>
 
-        <Image Source="/Assets/LoginCompanySymbol.png" Width="150" Height="150" VerticalAlignment="Top" Margin="30"/>
+        <Image Source="/Assets/Company_Symbol_small.png" Width="150" Height="150" VerticalAlignment="Top" Margin="30"/>
     </Grid>
 </Window>

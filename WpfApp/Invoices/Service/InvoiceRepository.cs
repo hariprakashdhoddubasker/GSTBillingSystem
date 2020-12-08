@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WpfApp.Common;
 using WpfApp.DataAccess;
 using WpfApp.Helpers;
 using WpfApp.Model;
@@ -11,16 +12,16 @@ namespace WpfApp.Invoices.Service
 {
     public class InvoiceRepository : IInvoiceRepository
     {
-        private readonly Func<WfpAppDbContext> _context;
+        private readonly IContextResolver _context;
 
-        public InvoiceRepository(Func<WfpAppDbContext> contextCreator)
+        public InvoiceRepository()
         {
-            _context = contextCreator;
+            _context = new ContextResolver();
         }
 
         public async Task<List<Invoice>> GetAllAsync()
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return await ctx.Invoices.AsNoTracking().ToListAsync();
             }
@@ -28,7 +29,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<List<Invoice>> AddRangeAsync(List<Invoice> invoices)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 ctx.Invoices.AddRange(invoices);
 
@@ -48,7 +49,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<List<Invoice>> UpdateRangeAsync(List<Invoice> invoices)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 if (!ctx.Invoices.Local.Except(invoices).Any())
                 {
@@ -73,7 +74,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<bool> DeleteAsync(int invoiceId)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 var invoice = ctx.Invoices.FirstOrDefault(c => c.InvoiceId == invoiceId);
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WpfApp.Common;
 using WpfApp.DataAccess;
 using WpfApp.Helpers;
 using WpfApp.Model;
@@ -11,16 +12,16 @@ namespace WpfApp.Registration.Service
 {
     public class ProductRepository : IProductRepository
     {
-        private Func<WfpAppDbContext> _context;
+        private readonly IContextResolver _context;
 
-        public ProductRepository(Func<WfpAppDbContext> contextCreator)
+        public ProductRepository()
         {
-            _context = contextCreator;
+            _context = new ContextResolver();
         }
 
         public async Task<List<Product>> GetAllAsync()
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return await ctx.Products.AsNoTracking().ToListAsync();
             }
@@ -28,7 +29,7 @@ namespace WpfApp.Registration.Service
 
         public Task<Product> GetCustomerAsync(int id)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return ctx.Products.FirstOrDefaultAsync(c => c.ProductId == id);
             }
@@ -36,7 +37,7 @@ namespace WpfApp.Registration.Service
 
         public async Task<Product> AddAsync(Product state)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 ctx.Products.Attach(state);
                 try
@@ -53,7 +54,7 @@ namespace WpfApp.Registration.Service
 
         public async Task<Product> UpdateAsync(Product state)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 if (!ctx.Products.Local.Any(c => c.ProductId == state.ProductId))
                 {
@@ -75,7 +76,7 @@ namespace WpfApp.Registration.Service
 
         public async Task DeleteAsync(int customerId)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 var state = ctx.Products.FirstOrDefault(c => c.ProductId == customerId);
                 if (state != null)

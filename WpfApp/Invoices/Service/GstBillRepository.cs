@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Common;
 using WpfApp.DataAccess;
 using WpfApp.Helpers;
 using WpfApp.Model;
@@ -12,16 +13,16 @@ namespace WpfApp.Invoices.Service
 {
     public class GstBillRepository : IGstBillRepository
     {
-        private readonly Func<WfpAppDbContext> _context;
+        private readonly IContextResolver _context;
 
-        public GstBillRepository(Func<WfpAppDbContext> contextCreator)
+        public GstBillRepository()
         {
-            _context = contextCreator;
+            _context = new ContextResolver();
         }
 
         public async Task<List<GstBill>> GetAllAsync()
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return await ctx.GstBills.AsNoTracking().ToListAsync();
             }
@@ -29,7 +30,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<GstBill> AddAsync(GstBill gstBill)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 ctx.GstBills.AddRange(gstBill);
 
@@ -49,7 +50,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<GstBill> UpdateAsync(GstBill gstBill)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 if (!ctx.GstBills.Local.Any(gst => gst.GstBillId == gstBill.GstBillId))
                 {
@@ -72,7 +73,7 @@ namespace WpfApp.Invoices.Service
 
         public async Task<bool> DeleteAsync(int gstBillId)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 var invoice = ctx.GstBills.FirstOrDefault(c => c.GstBillId == gstBillId);
 

@@ -7,21 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp.Common;
 
 namespace WpfApp.Employees.Service
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        private readonly Func<WfpAppDbContext> _context;
+        private readonly IContextResolver _context;
 
-        public EmployeeRepository(Func<WfpAppDbContext> contextCreator)
+        public EmployeeRepository()
         {
-            _context = contextCreator;
+            _context = new ContextResolver();
         }
 
         public async Task<IEnumerable<Employee>> GetAllAsync()
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return await ctx.Employees.AsNoTracking().ToListAsync();
             }
@@ -29,7 +30,7 @@ namespace WpfApp.Employees.Service
 
         public Task<Employee> GetEntityByIdAsync(int id)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return ctx.Employees.FirstOrDefaultAsync(c => c.EmployeeId == id);
             }
@@ -37,7 +38,7 @@ namespace WpfApp.Employees.Service
 
         public async Task<Employee> AddAsync(Employee employee)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 ctx.Employees.Add(employee);
                 try
@@ -54,7 +55,7 @@ namespace WpfApp.Employees.Service
 
         public async Task<Employee> UpdateAsync(Employee employee)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 if (!ctx.Employees.Local.Any(c => c.EmployeeId == employee.EmployeeId))
                 {

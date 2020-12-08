@@ -40,7 +40,7 @@
         </TextBlock>
         <Grid Margin="0 50 0 0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Stretch" >
             <Grid.Background>
-                <ImageBrush ImageSource="/Assets/Company_Background.jpg"  Stretch="Uniform" Opacity="0.2"/>
+                <ImageBrush ImageSource="/Assets/Company_Symbol_small.png"  Stretch="Uniform" Opacity="0.2"/>
             </Grid.Background>
             <ContentControl Content="{Binding SelectedViewModel}"/>
         </Grid>

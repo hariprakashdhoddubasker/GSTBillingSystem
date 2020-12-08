@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WpfApp.Common;
 using WpfApp.DataAccess;
 using WpfApp.Helpers;
 using WpfApp.Model;
@@ -11,16 +12,16 @@ namespace WpfApp.Registration.Service
 {
     public class StateRepository : IStateRepository
     {
-        private Func<WfpAppDbContext> _context;
+        private readonly IContextResolver _context;
 
-        public StateRepository(Func<WfpAppDbContext> contextCreator)
+        public StateRepository()
         {
-            _context = contextCreator;
+            _context = new ContextResolver();
         }
 
         public async Task<List<State>> GetAllAsync()
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return await ctx.States.AsNoTracking().ToListAsync();
             }
@@ -28,7 +29,7 @@ namespace WpfApp.Registration.Service
 
         public Task<State> GetCustomerAsync(int id)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 return ctx.States.FirstOrDefaultAsync(c => c.StateId == id);
             }
@@ -36,7 +37,7 @@ namespace WpfApp.Registration.Service
 
         public async Task<State> AddAsync(State state)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 ctx.States.Attach(state);
                 try
@@ -53,7 +54,7 @@ namespace WpfApp.Registration.Service
 
         public async Task<State> UpdateAsync(State state)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 if (!ctx.States.Local.Any(c => c.StateId == state.StateId))
                 {
@@ -75,7 +76,7 @@ namespace WpfApp.Registration.Service
 
         public async Task DeleteAsync(int customerId)
         {
-            using (var ctx = _context())
+            using (var ctx = _context.ResolveContext())
             {
                 var state = ctx.States.FirstOrDefault(c => c.StateId == customerId);
                 if (state != null)
