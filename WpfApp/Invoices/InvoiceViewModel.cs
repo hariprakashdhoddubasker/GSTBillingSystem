@@ -86,9 +86,9 @@ namespace WpfApp.Invoices
             this.IsTaxPayableReverseItems = new ObservableCollection<string> { "Yes", "No" };
 
             this.ButtonState = "SAVE";
-            var t = new Thread(()=> { webBrowser = new System.Windows.Forms.WebBrowser(); });
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
+            //var t = new Thread(()=> { webBrowser = new System.Windows.Forms.WebBrowser(); });
+            //t.SetApartmentState(ApartmentState.STA);
+            //t.Start();
           
         }
 
@@ -305,12 +305,6 @@ namespace WpfApp.Invoices
 
         private async void OnSaveClick(object obj)
         {
-            if (string.IsNullOrEmpty(mySignatureFilePath))
-            {
-                UIService.ShowMessage("Register Signature before proceeding");
-                return;
-            }
-
             if (ButtonState == "SAVE")
             {
                 AddInvoiceToGrid();
@@ -328,7 +322,7 @@ namespace WpfApp.Invoices
             ((Command)this.BtnSaveCommand).RaiseCanExecuteChanged();
             ((Command)this.BtnAddCommand).RaiseCanExecuteChanged();
 
-            Print(savedGstBill.GstBillFilePath);
+            //Print(savedGstBill.GstBillFilePath);
 
             if (savedInvoices != null)
             {
@@ -340,16 +334,16 @@ namespace WpfApp.Invoices
             }
         }
 
-        void Print(string str)
-        {
-            webBrowser.DocumentText = File.ReadAllText(str);
-            webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
-        }
+        //void Print(string str)
+        //{
+        //    webBrowser.DocumentText = File.ReadAllText(str);
+        //    webBrowser.DocumentCompleted += webBrowser_DocumentCompleted;
+        //}
 
-        void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            ((System.Windows.Forms.WebBrowser)sender).ShowPrintPreviewDialog();
-        }
+        //void webBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        //{
+        //    ((System.Windows.Forms.WebBrowser)sender).ShowPrintPreviewDialog();
+        //}
 
         private void OnAddClick(object obj)
         {

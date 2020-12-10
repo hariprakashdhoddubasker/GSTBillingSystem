@@ -48,7 +48,13 @@ namespace WpfApp.Helpers.HtmlService
 
             if (!string.IsNullOrEmpty(gstBill.SignatureFilePath))
             {
-                baseHtmlFileContent = baseHtmlFileContent.Replace("|InvoiceSignatureData|", Utility.ImageToBase64(gstBill.SignatureFilePath));
+                var SignatureImageTag = "<img width=\"150\" height=\"100\" src=\"data:image/jpeg;base64,|InvoiceSignatureData|\"/>";
+                SignatureImageTag = SignatureImageTag.Replace("|InvoiceSignatureData|", Utility.ImageToBase64(gstBill.SignatureFilePath));
+                baseHtmlFileContent = baseHtmlFileContent.Replace("|InvoiceSignatureImage|", SignatureImageTag);
+            }
+            else
+            {
+                baseHtmlFileContent = baseHtmlFileContent.Replace("|InvoiceSignatureImage|", string.Empty);
             }
 
 
