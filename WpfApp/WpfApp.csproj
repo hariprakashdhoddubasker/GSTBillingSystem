@@ -18,8 +18,9 @@
     <None Remove="Assets\GstBillStatement.html" />
     <None Remove="Assets\Hari.JPG" />
     <None Remove="Assets\InvoiceReport.html" />
-    <None Remove="Assets\LoginCompanySymbol.png" />
+    <None Remove="Assets\LoginCompany Symbol.png" />
     <None Remove="Assets\OM.jpg" />
+    <None Remove="Assets\RS logo.png" />
     <None Remove="Helpers\HtmlService\LetterPad.html" />
   </ItemGroup>
 
@@ -45,7 +46,7 @@
     <Content Include="Assets\InvoiceReport.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\LoginCompanySymbol.png">
+    <Content Include="Assets\LoginCompany Symbol.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\OM.jpg">
@@ -53,6 +54,9 @@
     </Content>
     <Content Include="Assets\LetterPad.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\RS logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

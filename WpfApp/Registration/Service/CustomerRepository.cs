@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WpfApp.Common;
-using WpfApp.DataAccess;
 using WpfApp.Helpers;
 using WpfApp.Model;
 

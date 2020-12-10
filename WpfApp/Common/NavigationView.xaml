@@ -21,7 +21,7 @@
             <Button Grid.Row="0" HorizontalAlignment="Right" Height="35" VerticalAlignment="Top" Background="Transparent" BorderBrush="Transparent" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Menu" Width="25" Height="25" Foreground="Gray"/>
             </Button>
-            <Image Grid.Row="1" Source="/Assets/Company_Symbol_small.png"/>
+            <Image Grid.Row="1" Source="/Assets/RS logo.png"/>
         </Grid>
         <ScrollViewer HorizontalAlignment="Stretch" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Grid.Row="1">
             <ContentControl Content="{Binding MenuItem}"/>
