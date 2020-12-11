@@ -44,7 +44,6 @@ namespace WpfApp.DataAccess
             {
                 UserName = "Rishi",
                 Password = "54321",
-                MobileNumber = 8089947074,
                 Role = "Admin"
             });
 
