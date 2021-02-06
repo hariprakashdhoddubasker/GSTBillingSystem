@@ -65,12 +65,20 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
     <PackageReference Include="sautinsoft.rtftohtml" Version="7.4.5.25" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="88.0.4324.9600" />
     <PackageReference Include="Unity" Version="5.11.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WpfApp.DataAccess\WpfApp.DataAccess.csproj" />
     <ProjectReference Include="..\WpfApp.Model\WpfApp.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="chromedriver.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

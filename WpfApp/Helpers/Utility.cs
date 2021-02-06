@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
+using WpfApp.Helpers.HtmlService;
 
 namespace WpfApp.Helpers
 {
@@ -63,27 +65,37 @@ namespace WpfApp.Helpers
             return (financialYearStartDate, financialYearEndDate);
         }
 
+        //public static void OpenFile(string fileSavePath)
+        //{
+        //    using (Process myProcess = Process.Start(@"cmd.exe ", @"/c " + fileSavePath))
+        //    {
+        //        for (int i = 0; i < 5; i++)
+        //        {
+        //            if (!myProcess.HasExited)
+        //            {
+        //                myProcess.Refresh();
+        //                Thread.Sleep(1000);
+        //            }
+        //            else
+        //            {
+        //                break;
+        //            }
+        //        }
+
+        //        myProcess.CloseMainWindow();
+        //        myProcess.Close();
+        //    }
+        //}
+
         public static void OpenFile(string fileSavePath)
         {
-            using (Process myProcess = Process.Start(@"cmd.exe ", @"/c " + fileSavePath))
+            Task.Run(() =>
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    if (!myProcess.HasExited)
-                    {
-                        myProcess.Refresh();
-                        Thread.Sleep(1000);
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                myProcess.CloseMainWindow();
-                myProcess.Close();
-            }
+                ChromeDriverHelper chromeDriverService = new ChromeDriverHelper();
+                chromeDriverService.OpenHtmlFile(fileSavePath);
+            });
         }
+
 
         public static string ParseStringWithKeyAndPoint(string content, string key, string endPoint = "")
         {

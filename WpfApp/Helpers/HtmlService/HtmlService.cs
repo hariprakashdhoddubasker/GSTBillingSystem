@@ -46,7 +46,19 @@ namespace WpfApp.Helpers.HtmlService
             }
             baseHtmlFileContent = InsertHeaderImages(baseHtmlFileContent);
             baseHtmlFileContent = baseHtmlFileContent.Replace("|LetterPadContent|", htmlReport);
-            baseHtmlFileContent = baseHtmlFileContent.Replace("|LetterPadSignature|", signatureFilePath);
+
+            if (!string.IsNullOrEmpty(signatureFilePath))
+            {
+                var SignatureImageTag = "<img width=\"150\" height=\"100\" src=\"data:image/jpeg;base64,|InvoiceSignatureData|\"/>";
+                SignatureImageTag = SignatureImageTag.Replace("|InvoiceSignatureData|", Utility.ImageToBase64(signatureFilePath));
+                baseHtmlFileContent = baseHtmlFileContent.Replace("|InvoiceSignatureImage|", SignatureImageTag);
+            }
+            else
+            {
+                baseHtmlFileContent = baseHtmlFileContent.Replace("|InvoiceSignatureImage|", string.Empty);
+            }
+
+            //baseHtmlFileContent = baseHtmlFileContent.Replace("|LetterPadSignature|", signatureFilePath);
             baseHtmlFileContent = baseHtmlFileContent.Replace("|LetterPadDate|", $"{DateTime.Now:dd/MM/yyyy}");
 
             List<string> letterPadFileTypeNames = new List<string>() { "Worker Copy", "Original Copy" };
