@@ -114,7 +114,7 @@
                         <DataGridTextColumn Header="Date" Binding="{Binding GstDate, StringFormat=\{0:ddMMMyyyy\}}" Width="*"/>
                         <DataGridTextColumn Header="Bill No" IsReadOnly="True" Binding="{Binding BillSerialNumber}"  Width="*"/>
                         <DataGridTextColumn Header="Customer Name" IsReadOnly="True" Binding="{Binding Customer}" Width="*"/>
-                        <DataGridTextColumn Header="Before Tax" IsReadOnly="True" Binding="{Binding AmountAfterTax, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
+                        <DataGridTextColumn Header="Before Tax" IsReadOnly="True" Binding="{Binding AmountBeforeTax, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
                         <DataGridTextColumn Header="IGST" IsReadOnly="True" Binding="{Binding IGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
                         <DataGridTextColumn Header="SGST" IsReadOnly="True" Binding="{Binding SGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>
                         <DataGridTextColumn Header="CGST" IsReadOnly="True" Binding="{Binding CGST, ConverterCulture='gu-IN' ,StringFormat=c0}" Width="*"/>

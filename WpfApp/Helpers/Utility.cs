@@ -65,29 +65,12 @@ namespace WpfApp.Helpers
             return (financialYearStartDate, financialYearEndDate);
         }
 
-        //public static void OpenFile(string fileSavePath)
-        //{
-        //    using (Process myProcess = Process.Start(@"cmd.exe ", @"/c " + fileSavePath))
-        //    {
-        //        for (int i = 0; i < 5; i++)
-        //        {
-        //            if (!myProcess.HasExited)
-        //            {
-        //                myProcess.Refresh();
-        //                Thread.Sleep(1000);
-        //            }
-        //            else
-        //            {
-        //                break;
-        //            }
-        //        }
-
-        //        myProcess.CloseMainWindow();
-        //        myProcess.Close();
-        //    }
-        //}
-
         public static void OpenFile(string fileSavePath)
+        {
+            Process.Start(new ProcessStartInfo(fileSavePath) { UseShellExecute = true });
+        }
+
+        public static void OpenHtmlFile(string fileSavePath)
         {
             Task.Run(() =>
             {
