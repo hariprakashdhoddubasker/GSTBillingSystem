@@ -1,7 +1,7 @@
-# RishiSilvers – GST Billing & Invoicing System
+# GSTBillingSystem – GST Billing & Invoicing System
 
 ## Overview
-RishiSilvers is a WPF-based desktop billing application tailored for businesses that need to generate GST-compliant invoices (for example, a jewelry or retail shop). Developed in C# .NET, the application simplifies the process of creating professional invoices that adhere to India’s Goods and Services Tax regulations. Users can maintain a catalog of products and customers, generate invoices with automatic tax calculations, and keep track of sales records in an organized manner.
+GSTBillingSystem is a WPF-based desktop billing application tailored for businesses that need to generate GST-compliant invoices (for example, a jewelry or retail shop). Developed in C# .NET, the application simplifies the process of creating professional invoices that adhere to India’s Goods and Services Tax regulations. Users can maintain a catalog of products and customers, generate invoices with automatic tax calculations, and keep track of sales records in an organized manner.
 
 ## Features
 
@@ -13,7 +13,7 @@ RishiSilvers is a WPF-based desktop billing application tailored for businesses 
 
 ## Technical Highlights
 
-- **MVVM Architecture:** RishiSilvers follows an MVVM architecture in its WPF implementation, ensuring a clear separation of UI and logic.
+- **MVVM Architecture:** GSTBillingSystem follows an MVVM architecture in its WPF implementation, ensuring a clear separation of UI and logic.
 - **Data Binding:** Real-time calculations (such as tax and totals) are automatically updated as items are added to invoices.
 - **Local Database:** A local SQL-based database (e.g., SQL Server Express or SQLite) stores all master and transaction data for persistence and reliability.
 - **ORM Support:** Uses Entity Framework (or ADO.NET) to manage database interactions with consistency and robustness.
@@ -27,8 +27,8 @@ RishiSilvers is a WPF-based desktop billing application tailored for businesses 
 - Install a local database server (SQL Server Express or SQLite, as supported).
 
 ### 2. Source Code
-- Clone or download the [RishiSilvers](https://github.com/hariprakashdhoddubasker/RishiSilvers) repository.
-- Navigate to the `RishiSilvers\WpfApp` project folder and open the solution file (`.sln`) in Visual Studio.
+- Clone or download the [GSTBillingSystem](https://github.com/hariprakashdhoddubasker/GSTBillingSystem) repository.
+- Navigate to the `GSTBillingSystem\WpfApp` project folder and open the solution file (`.sln`) in Visual Studio.
 - Ensure the companion `CommonAppBase` project is included and correctly referenced in the solution.
 
 ### 3. Database Setup
@@ -40,7 +40,7 @@ RishiSilvers is a WPF-based desktop billing application tailored for businesses 
 - Build the project in Visual Studio, resolving all references and dependencies.
 
 ### 5. Run & Usage
-- Launch the RishiSilvers application.
+- Launch the GSTBillingSystem application.
 - Populate the **Master Data** section by adding some products and customers.
 - Go to the **Billing** section to create a new invoice:
   - Select a customer.
